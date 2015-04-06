@@ -7,3 +7,17 @@
 
 <p><%= link_to 'edit ', edit_post_path(@post) %></p>
 <p><%= link_to 'all posts', posts_path %></p>
+
+<%= form_for [@post, Comment.new] do |f| %>
+  <div>
+    <%= f.label :comment %>
+    <%= f.text_area :body %>
+  </div>
+  <%= f.submit %>
+<% end %>
+
+<% @post.comments.each do |comment| %>
+<article>
+  "<%= comment.body %>"
+</article>
+<% end %>
