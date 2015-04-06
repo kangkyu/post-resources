@@ -5,3 +5,27 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+users = User.create([
+  { username: "username string" },
+  { username: "username string" },
+  { username: "username string" }
+])
+posts = Post.create([
+  { user: users.first,
+    url: "www.example.com",
+    title: "title string",
+    description: "description text" },
+  { user: users.first,
+    url: "www.example.com",
+    title: "title string",
+    description: "description text" }
+])
+Comment.create([
+  { user: users.first,
+    post: posts.first,
+    body: "comment body text" },
+  { user: users.first,
+    post: posts.first,
+    body: "comment body text" }
+])
