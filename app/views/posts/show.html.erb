@@ -2,7 +2,7 @@
 
   <% @post.categories.each do |category| %>
   <ul>
-    <li><%= category.name %></li>
+    <li><%= link_to category.name, category %></li>
   </ul>
   <% end %>
   <h4><%= @post.title %></h4>

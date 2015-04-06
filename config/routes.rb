@@ -6,4 +6,5 @@ PostitTemplate::Application.routes.draw do
 
   post 'categories' => 'categories#create'
   get 'categories/new', as: 'new_category'
+  get 'category/:id' => 'categories#show', as: 'category'
 end
