@@ -1,5 +1,10 @@
 <article>
 
+  <% @post.categories.each do |category| %>
+  <ul>
+    <li><%= category.name %></li>
+  </ul>
+  <% end %>
   <h4><%= @post.title %></h4>
   <p><%= @post.description %></p>
   <h4><%= @post.url %></h4>

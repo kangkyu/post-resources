@@ -4,6 +4,7 @@ class PostsController < ApplicationController
   end
   def show
     @post = Post.find(params[:id])
+    logger.info @post.categories
   end
   def new
     @post = Post.new
