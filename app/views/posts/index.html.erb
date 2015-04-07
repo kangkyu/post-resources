@@ -1,7 +1,6 @@
 <h3>Welcome!</h3>
 
 <% if current_user %>
-  <%= link_to 'logout', logout_path, method: :delete %>
   <%= link_to 'new category', new_category_path %>
 
   <% Category.all.each do |category| %>
