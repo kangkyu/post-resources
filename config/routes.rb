@@ -8,9 +8,9 @@ PostitTemplate::Application.routes.draw do
   get 'categories/new', as: 'new_category'
   get 'category/:id' => 'categories#show', as: 'category'
 
-  get 'login' => 'sessions#new'
-  post 'login' => 'sessions#create'
-  delete 'logout' => 'sessions#destroy'
+  get 'login' => 'login#new'
+  post 'login' => 'login#create'
+  delete 'logout' => 'login#destroy'
   # resource :session
 
   resources :users
