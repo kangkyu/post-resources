@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params.require(:user).permit!)
     if @user.save
-      redirect_to root_url, notice: "registered and logged in"
+      redirect_to root_url, notice: "notice. registered and logged in"
       session[:user_id] = @user.id
     else
       flash[:error] = "error. try again"

@@ -6,7 +6,7 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(params.require(:category).permit(:name))
     if @category.save
-      redirect_to root_url
+      redirect_to root_url, notice: "notice. category added"
     else
       flash[:error] = "error. category not saved"
       render action: 'new'

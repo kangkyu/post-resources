@@ -13,7 +13,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = session[:user_id]
     if @post.save
-      redirect_to post_url(@post)
+      redirect_to post_url(@post), notice: "notice. post added"
     else
       flash[:error] = "error. not saved"
       render action: "new"
@@ -27,7 +27,7 @@ class PostsController < ApplicationController
   end
   def update
     if correct_user? && @post.update(post_params)
-      redirect_to post_url(@post)
+      redirect_to post_url(@post), notice: "notice. post updated"
     else
       flash[:error] = "error. not updated"
       render action: "edit"
