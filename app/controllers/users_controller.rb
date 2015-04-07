@@ -24,8 +24,9 @@ class UsersController < ApplicationController
   end
   def update
     if correct_user? && @user.update(params.require(:user).permit(:username, :password, :password_confirmation))
-      redirect_to user_url(@user)
+      redirect_to user_url(@user), notice: "notice. user updated"
     else
+      flash[:error] = "error. not updated"
       render action: 'edit'
     end
   end
