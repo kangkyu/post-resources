@@ -1,16 +1,17 @@
 <h3>Welcome!</h3>
 
-<%= link_to 'new category', new_category_path %>
+<% if current_user %>
+  <%= link_to 'logout', logout_path, method: :delete %>
+  <%= link_to 'new category', new_category_path %>
 
-<% Category.all.each do |category| %>
-<ul>
-  <li><%= category.name %></li>
-</ul>
+  <% Category.all.each do |category| %>
+  <ul>
+    <li><%= category.name %></li>
+  </ul>
+  <% end %>
+
+  <%= link_to 'new post', new_post_path %>
 <% end %>
-
-<p>This is the Postit template. You've access the PostsController, index action. This is the index template. Find me under app/views/posts folder.</p>
-
-<%= link_to 'new post', new_post_path %>
 
 <% @posts.each do |post| %>
 <article>

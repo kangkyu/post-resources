@@ -4,9 +4,9 @@ class PostsController < ApplicationController
   end
   def show
     @post = Post.find(params[:id])
-    logger.info @post.categories
   end
   def new
+    authenticate_user
     @post = Post.new
   end
   def create
@@ -19,6 +19,7 @@ class PostsController < ApplicationController
     end
   end
   def edit
+    authenticate_user
     @post = Post.find(params[:id])
   end
   def update

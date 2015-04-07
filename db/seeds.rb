@@ -7,9 +7,12 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 users = User.create([
-  { username: "username string" },
-  { username: "username string" },
-  { username: "username string" }
+  { username: "username string",
+    password: "password",
+    password_confirmation: "password" },
+  { username: "username string",
+    password: "password",
+    password_confirmation: "password" }
 ])
 posts = Post.create([
   { user: users.first,

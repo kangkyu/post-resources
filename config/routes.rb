@@ -7,4 +7,11 @@ PostitTemplate::Application.routes.draw do
   post 'categories' => 'categories#create'
   get 'categories/new', as: 'new_category'
   get 'category/:id' => 'categories#show', as: 'category'
+
+  get 'login' => 'sessions#new'
+  post 'login' => 'sessions#create'
+  delete 'logout' => 'sessions#destroy'
+  # resource :session
+
+  resources :users
 end
