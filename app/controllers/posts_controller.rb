@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   before_action :load_post, only: [:update, :edit, :show]
   def index
     @posts = Post.all
+    @categories = Category.all
   end
   def show
   end

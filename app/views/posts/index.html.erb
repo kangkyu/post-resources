@@ -2,12 +2,7 @@
 
 <% if current_user %>
   <%= link_to 'new category', new_category_path %>
-
-  <% Category.all.each do |category| %>
-  <ul>
-    <li><%= category.name %></li>
-  </ul>
-  <% end %>
+  <%= render @categories %>
 
   <%= link_to 'new post', new_post_path %>
 <% end %>

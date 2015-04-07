@@ -13,8 +13,4 @@
   <%= f.submit %>
 <% end %>
 
-<% @post.comments.each do |comment| %>
-<article>
-  "<%= comment.body %>"
-</article>
-<% end %>
+<%= render @post.comments %>
