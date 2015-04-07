@@ -14,17 +14,24 @@ users = User.create([
     password: "password",
     password_confirmation: "password" }
 ])
+categories = Category.create([
+  { name: "category string" },
+  { name: "category string" },
+  { name: "category string" }
+])
 posts = Post.create([
   { user: users.first,
+    categories: [categories.first, categories.last],
     url: "www.example.com",
     title: "title string",
     description: "description text" },
   { user: users.first,
+    categories: [categories.first, categories.last],
     url: "www.example.com",
     title: "title string",
     description: "description text" }
 ])
-Comment.create([
+comments = Comment.create([
   { user: users.first,
     post: posts.first,
     body: "comment body text" },
