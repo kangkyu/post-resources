@@ -4,5 +4,5 @@
   <h4><%= link_to post.title, post %></h4>
   <p><%= post.description %></p>
   <h4><%= post.url %></h4>
-  <p><%= link_to post.user.username, user_path(post.user) %></p>
+  <p>- written by <%= link_to post.user.username, user_path(post.user) %> - added at <%= post.created_at %></p>
 </article>
