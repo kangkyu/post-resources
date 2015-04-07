@@ -5,3 +5,19 @@
     <%= link_to 'edit user', edit_user_path(@user) %>
   <% end %>
 </article>
+
+<h4><%= 'all comments' if @user.comments.any? %></h4>
+<% @user.comments.each do |comment| %>
+<article>
+  "<%= comment.body %>"
+</article>
+<% end %>
+
+<h4><%= 'all posts' if @user.posts.any? %></h4>
+<% @user.posts.each do |post| %>
+<article>
+  <h4><%= link_to post.title, post %></h4>
+  <p><%= post.description %></p>
+  <h4><%= post.url %></h4>
+</article>
+<% end %>

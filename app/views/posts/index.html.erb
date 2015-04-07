@@ -12,16 +12,4 @@
   <%= link_to 'new post', new_post_path %>
 <% end %>
 
-<% @posts.each do |post| %>
-<article>
-
-  <% post.categories.each do |category| %>
-  <ul>
-    <li><%= category.name %></li>
-  </ul>
-  <% end %>
-  <h4><%= link_to post.title, post %></h4>
-  <p><%= post.description %></p>
-  <h4><%= post.url %></h4>
-</article>
-<% end %>
+<%= render @posts %>

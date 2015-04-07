@@ -1,17 +1,7 @@
-<article>
-
-  <% @post.categories.each do |category| %>
-  <ul>
-    <li><%= link_to category.name, category %></li>
-  </ul>
-  <% end %>
-  <h4><%= @post.title %></h4>
-  <p><%= @post.description %></p>
-  <h4><%= @post.url %></h4>
-  <% if correct_user? %>
-    <p><%= link_to 'edit post', edit_post_path(@post) %></p>
-  <% end %>
-</article>
+<%= render @post %>
+<% if correct_user? %>
+  <p><%= link_to 'edit post', edit_post_path(@post) %></p>
+<% end %>
 
 <p><%= link_to 'back to all posts', posts_path %></p>
 
