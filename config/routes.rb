@@ -13,5 +13,6 @@ PostitTemplate::Application.routes.draw do
   delete 'logout' => 'login#destroy'
   # resource :session
 
+  get 'register' => 'users#new'
   resources :users
 end
