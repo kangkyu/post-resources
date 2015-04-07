@@ -1,4 +1,5 @@
 class LoginController < ApplicationController
+  before_action :authenticate_user, only: :destroy
   def new
   end
   def create

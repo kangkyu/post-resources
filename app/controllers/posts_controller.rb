@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user, except: [:index, :show]
   def index
     @posts = Post.all
   end
@@ -6,7 +7,6 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
   def new
-    authenticate_user
     @post = Post.new
   end
   def create
@@ -19,7 +19,6 @@ class PostsController < ApplicationController
     end
   end
   def edit
-    authenticate_user
     @post = Post.find(params[:id])
   end
   def update
