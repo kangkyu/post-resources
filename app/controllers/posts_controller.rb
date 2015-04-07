@@ -45,4 +45,5 @@ class PostsController < ApplicationController
   def correct_user?
     current_user == @post.user
   end
+  helper_method :correct_user?
 end
