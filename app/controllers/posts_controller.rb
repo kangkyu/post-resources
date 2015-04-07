@@ -1,33 +1,48 @@
 class PostsController < ApplicationController
   before_action :authenticate_user, except: [:index, :show]
+  before_action :load_post, only: [:update, :edit, :show]
   def index
     @posts = Post.all
   end
   def show
-    @post = Post.find(params[:id])
   end
   def new
     @post = Post.new
   end
   def create
-    @post = Post.new(params.require(:post).permit!)
+    @post = Post.new(post_params)
+    @post.user_id = session[:user_id]
     if @post.save
       redirect_to post_url(@post)
     else
       flash[:error] = "error. not saved"
-      render "new"
+      render action: "new"
     end
   end
   def edit
-    @post = Post.find(params[:id])
+    unless correct_user?
+      flash[:error] = "error. not the user added this post"
+      render template: 'posts/show'
+    end
   end
   def update
-    @post = Post.find(params[:id])
-    if @post.update(params.require(:post).permit!)
+    if correct_user? && @post.update(post_params)
       redirect_to post_url(@post)
     else
       flash[:error] = "error. not updated"
-      render "edit"
+      render action: "edit"
     end
+  end
+
+  private
+
+  def load_post
+    @post = Post.find(params[:id])
+  end
+  def post_params
+    params.require(:post).permit(:url, :title, :description, category_ids: [])
+  end
+  def correct_user?
+    current_user == @post.user
   end
 end

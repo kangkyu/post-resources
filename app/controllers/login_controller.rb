@@ -9,7 +9,7 @@ class LoginController < ApplicationController
       redirect_to root_url
     else
       flash[:error] = "error. not authenticated"
-      render 'new'
+      render action: 'new'
     end
   end
   def destroy

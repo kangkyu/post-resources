@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
     else
       flash[:error] = "error. try again"
-      render 'new'
+      render action: 'new'
     end
   end
 end
