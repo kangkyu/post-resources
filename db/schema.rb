@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150406231650) do
+ActiveRecord::Schema.define(version: 20150408004648) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -49,5 +49,15 @@ ActiveRecord::Schema.define(version: 20150406231650) do
     t.datetime "updated_at"
     t.string   "password_digest"
   end
+
+  create_table "votes", force: true do |t|
+    t.string   "votable_type"
+    t.integer  "votable_id"
+    t.boolean  "voted"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["votable_id", "votable_type"], name: "index_votes_on_votable_id_and_votable_type", unique: true
 
 end
