@@ -1,8 +1,5 @@
 PostitTemplate::Application.routes.draw do
   root to: 'posts#index'
-  resources :posts, except: :destroy do
-    post 'comments' => 'comments#create'
-  end
 
   post 'categories' => 'categories#create'
   get 'categories/new', as: 'new_category'
@@ -14,5 +11,14 @@ PostitTemplate::Application.routes.draw do
   # resource :session
 
   get 'register' => 'users#new'
+
+  resources :posts, except: :destroy do
+    post 'comments' => 'comments#create'
+    # resources :votes  # POST 'posts/:post_id/votes'
+    member do
+      post 'vote'       # POST 'posts/:id/vote'
+    end
+  end
+
   resources :users
 end

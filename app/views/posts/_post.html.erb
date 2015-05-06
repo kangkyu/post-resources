@@ -7,3 +7,8 @@
   <p>- written by <%= link_to post.user.username, user_path(post.user) %> - added at <%= post.created_at %></p>
   <%= pluralize(post.comments.size, 'Comment') %>
 </article>
+
+<%= link_to "vote plus", vote_post_path(post, voted: true), method: 'post' %> |
+<%= link_to "vote minus", vote_post_path(post, voted: false), method: 'post' %> |
+count <%= post.votes.count %> |
+net <%= post.votes.where(voted: true).count - post.votes.where(voted: false).count %>

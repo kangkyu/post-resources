@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user, except: [:index, :show]
-  before_action :load_post, only: [:update, :edit, :show]
+  before_action :load_post, only: [:update, :edit, :show, :vote]
   def index
     @posts = Post.all
     @categories = Category.all
@@ -33,6 +33,11 @@ class PostsController < ApplicationController
       flash[:error] = "error. not updated"
       render action: "edit"
     end
+  end
+
+  def vote
+    @post.votes.build(voted: params[:voted])
+    redirect_to posts_url
   end
 
   private
