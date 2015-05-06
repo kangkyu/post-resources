@@ -42,7 +42,7 @@ class PostsController < ApplicationController
       vote = @post.votes.build(voted: params[:voted], user: current_user)
       vote.save
     end
-    redirect_to posts_url
+    redirect_to post_url(@post)
   end
 
   private

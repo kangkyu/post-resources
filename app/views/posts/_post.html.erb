@@ -7,13 +7,17 @@
   <p>- written by <%= link_to post.user.username, user_path(post.user) %> - added at <%= post.created_at %></p>
   <%= pluralize(post.comments.size, 'Comment') %>
 </article>
-
-<% if current_user && post.votes.where(user: current_user).take.voted == true %>
-  <strong><%= link_to "vote plus", vote_post_path(post, voted: nil), method: 'post' %></strong> |
-  <%= link_to "vote minus", vote_post_path(post, voted: false), method: 'post' %> |
-<% elsif current_user && post.votes.where(user: current_user).take.voted == false %>
+<% if current_user && post.votes.where(user: current_user).take %>
+  <% if post.votes.where(user: current_user).take.voted == true %>
+    <strong><%= link_to "vote plus", vote_post_path(post, voted: nil), method: 'post' %></strong> |
+    <%= link_to "vote minus", vote_post_path(post, voted: false), method: 'post' %> |
+  <% elsif post.votes.where(user: current_user).take.voted == false %>
+    <%= link_to "vote plus", vote_post_path(post, voted: true), method: 'post' %> |
+    <strong><%= link_to "vote minus", vote_post_path(post, voted: nil), method: 'post' %></strong> |
+  <% else %>
   <%= link_to "vote plus", vote_post_path(post, voted: true), method: 'post' %> |
-  <strong><%= link_to "vote minus", vote_post_path(post, voted: nil), method: 'post' %></strong> |
+  <%= link_to "vote minus", vote_post_path(post, voted: false), method: 'post' %> |
+  <% end %>
 <% else %>
   <%= link_to "vote plus", vote_post_path(post, voted: true), method: 'post' %> |
   <%= link_to "vote minus", vote_post_path(post, voted: false), method: 'post' %> |
