@@ -23,4 +23,10 @@ class ApplicationController < ActionController::Base
     session.delete(:user_id)
     @current_user = nil
   end
+
+
+  def correct_user?(user)
+    current_user == user
+  end
+  helper_method :correct_user?
 end

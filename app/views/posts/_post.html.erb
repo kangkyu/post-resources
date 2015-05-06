@@ -8,7 +8,16 @@
   <%= pluralize(post.comments.size, 'Comment') %>
 </article>
 
-<%= link_to "vote plus", vote_post_path(post, voted: true), method: 'post' %> |
-<%= link_to "vote minus", vote_post_path(post, voted: false), method: 'post' %> |
+<% if current_user && post.votes.where(user: current_user).take.voted == true %>
+  <strong><%= link_to "vote plus", vote_post_path(post, voted: nil), method: 'post' %></strong> |
+  <%= link_to "vote minus", vote_post_path(post, voted: false), method: 'post' %> |
+<% elsif current_user && post.votes.where(user: current_user).take.voted == false %>
+  <%= link_to "vote plus", vote_post_path(post, voted: true), method: 'post' %> |
+  <strong><%= link_to "vote minus", vote_post_path(post, voted: nil), method: 'post' %></strong> |
+<% else %>
+  <%= link_to "vote plus", vote_post_path(post, voted: true), method: 'post' %> |
+  <%= link_to "vote minus", vote_post_path(post, voted: false), method: 'post' %> |
+<% end %>
+
 count <%= post.votes.count %> |
 net <%= post.votes.where(voted: true).count - post.votes.where(voted: false).count %>

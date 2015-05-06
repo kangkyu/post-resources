@@ -1,9 +1,9 @@
 <h1>User show</h1>
 <article>
   <p><%= @user.username %></p>
-  <% if correct_user? %>
+  <%# if correct_user?(@user) %>
     <%= link_to 'edit user', edit_user_path(@user) %>
-  <% end %>
+  <%# end %>
 </article>
 
 <h4><%= 'all comments' if @user.comments.any? %></h4>

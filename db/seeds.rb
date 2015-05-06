@@ -10,7 +10,7 @@ users = User.create([
   { username: "username string",
     password: "password",
     password_confirmation: "password" },
-  { username: "username string",
+  { username: "username two",
     password: "password",
     password_confirmation: "password" }
 ])

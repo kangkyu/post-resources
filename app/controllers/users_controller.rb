@@ -17,13 +17,13 @@ class UsersController < ApplicationController
     end
   end
   def edit
-    unless correct_user?
+    unless correct_user?(@user)
       flash[:error] = "error. can edit only current user"
       redirect_to user_url(@user)
     end
   end
   def update
-    if correct_user? && @user.update(params.require(:user).permit(:username, :password, :password_confirmation))
+    if correct_user?(@user) && @user.update(params.require(:user).permit(:username, :password, :password_confirmation))
       redirect_to user_url(@user), notice: "notice. user updated"
     else
       flash[:error] = "error. not updated"
@@ -36,8 +36,5 @@ class UsersController < ApplicationController
   def load_user
     @user = User.find(params[:id])
   end
-  def correct_user?
-    session[:user_id] == @user.id
-  end
-  helper_method :correct_user?
+
 end

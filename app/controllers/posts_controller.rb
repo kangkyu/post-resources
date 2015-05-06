@@ -3,7 +3,6 @@ class PostsController < ApplicationController
   before_action :load_post, only: [:update, :edit, :show, :vote]
   def index
     @posts = Post.all
-    @categories = Category.all
   end
   def show
   end
@@ -21,13 +20,13 @@ class PostsController < ApplicationController
     end
   end
   def edit
-    unless correct_user?
+    unless correct_user?(@post.user)
       flash[:error] = "error. not the user added this post"
       render template: 'posts/show'
     end
   end
   def update
-    if correct_user? && @post.update(post_params)
+    if correct_user?(@post.user) && @post.update(post_params)
       redirect_to post_url(@post), notice: "notice. post updated"
     else
       flash[:error] = "error. not updated"
@@ -36,7 +35,13 @@ class PostsController < ApplicationController
   end
 
   def vote
-    @post.votes.build(voted: params[:voted])
+    if @post.votes.where(user: current_user).count != 0
+      vote = @post.votes.find_by(user: current_user)
+      vote.update(voted: params[:voted])
+    else
+      vote = @post.votes.build(voted: params[:voted], user: current_user)
+      vote.save
+    end
     redirect_to posts_url
   end
 
@@ -48,8 +53,4 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:url, :title, :description, category_ids: [])
   end
-  def correct_user?
-    current_user == @post.user
-  end
-  helper_method :correct_user?
 end

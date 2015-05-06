@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150408004648) do
+ActiveRecord::Schema.define(version: 20150506160544) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -56,6 +56,9 @@ ActiveRecord::Schema.define(version: 20150408004648) do
     t.boolean  "voted"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "votes", ["votable_id", "user_id"], name: "index_votes_on_votable_id_and_user_id", unique: true
 
 end
