@@ -29,4 +29,4 @@ group :production do
   gem 'rails_12factor'
 end
 
-gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '~> 3.1.0'
