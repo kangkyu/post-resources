@@ -1,27 +1,32 @@
-<article>
-  <%= render post.categories %>
+<article >
 
+<div class="well well-sm col-sm-1">
+  <% if current_user && post.votes.where(user: current_user).take %>
+    <% if post.votes.where(user: current_user).take.voted == true %>
+      <strong><%= link_to "vote plus", vote_post_path(post, voted: nil), method: 'post' %></strong> |
+      <%= link_to "vote minus", vote_post_path(post, voted: false), method: 'post' %> |
+    <% elsif post.votes.where(user: current_user).take.voted == false %>
+      <%= link_to "vote plus", vote_post_path(post, voted: true), method: 'post' %> |
+      <strong><%= link_to "vote minus", vote_post_path(post, voted: nil), method: 'post' %></strong> |
+    <% else %>
+    <%= link_to "vote plus", vote_post_path(post, voted: true), method: 'post' %> |
+    <%= link_to "vote minus", vote_post_path(post, voted: false), method: 'post' %> |
+    <% end %>
+  <% else %>
+    <%= link_to "vote plus", vote_post_path(post, voted: true), method: 'post' %> |
+    <%= link_to "vote minus", vote_post_path(post, voted: false), method: 'post' %> |
+  <% end %>
+
+  count <%= post.votes.count %> |
+  net <%= post.votes.where(voted: true).count - post.votes.where(voted: false).count %>
+</div>
+<div class="col-sm-11">
   <h4><%= link_to post.title, post %></h4>
   <p><%= post.description %></p>
   <h4><%= post.url %></h4>
   <p>- written by <%= link_to post.user.username, user_path(post.user) %> - added at <%= post.created_at %></p>
-  <%= pluralize(post.comments.size, 'Comment') %>
-</article>
-<% if current_user && post.votes.where(user: current_user).take %>
-  <% if post.votes.where(user: current_user).take.voted == true %>
-    <strong><%= link_to "vote plus", vote_post_path(post, voted: nil), method: 'post' %></strong> |
-    <%= link_to "vote minus", vote_post_path(post, voted: false), method: 'post' %> |
-  <% elsif post.votes.where(user: current_user).take.voted == false %>
-    <%= link_to "vote plus", vote_post_path(post, voted: true), method: 'post' %> |
-    <strong><%= link_to "vote minus", vote_post_path(post, voted: nil), method: 'post' %></strong> |
-  <% else %>
-  <%= link_to "vote plus", vote_post_path(post, voted: true), method: 'post' %> |
-  <%= link_to "vote minus", vote_post_path(post, voted: false), method: 'post' %> |
-  <% end %>
-<% else %>
-  <%= link_to "vote plus", vote_post_path(post, voted: true), method: 'post' %> |
-  <%= link_to "vote minus", vote_post_path(post, voted: false), method: 'post' %> |
-<% end %>
+  <p><%= pluralize(post.comments.size, 'Comment') %></p>
 
-count <%= post.votes.count %> |
-net <%= post.votes.where(voted: true).count - post.votes.where(voted: false).count %>
+  <%= render post.categories %>
+</div>
+</article>
