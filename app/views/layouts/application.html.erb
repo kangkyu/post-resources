@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <meta http-equiv="refresh" content="3" > -->
+    <!-- <meta http-equiv="refresh" content="3"> -->
     <title>Tealeaf Academy - Postit</title>
     <meta name="description" content="">
     <meta name="author" content="">
@@ -32,11 +32,12 @@
       <div class="row">
         <div class="col-md-12">
           <%= render 'layouts/messages' %>
-          <div class="well"><%= render Category.all %></div>
-            <div class="row">
+          <div class="well">
+            <%= link_to content_tag(:span, "all", class: ( ["index"].include?(action_name) && ["posts"].include?(controller_name) ? "label label-danger" : "label label-default")), posts_path %>
+            <%= render Category.all %>
+          </div>
 
-              <%= yield %>
-            </div>
+          <%= yield %>
         </div>
       </div>
       <footer>

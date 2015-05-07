@@ -1,3 +1,7 @@
+<ul class="nav navbar-nav navbar-right">
+  <li><a href="#">Link</a></li>
+</ul>
+
 <ul class="nav navbar-nav">
   <% if user_log_in? %>
     <li>
@@ -6,7 +10,6 @@
     <li>
       <%= link_to 'profile', user_path(session[:user_id]) %>
     </li>
-
   <% else %>
     <li>
       <%= link_to 'login', login_path %>
@@ -14,11 +17,5 @@
     <li>
       <%= link_to 'register', register_path %>
     </li>
-
   <% end %>
 </ul>
-
-<ul class="nav navbar-nav navbar-right">
-  <li><a href="#">Link</a></li>
-</ul>
-

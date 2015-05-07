@@ -1,4 +1,7 @@
 <article class="well">
-  <%= "#{comment.body}" %>
-  <p>- written by <%= link_to comment.user.username, user_path(comment.user) %> - added at <%= comment.created_at %></p>
+  "<%= comment.body %>"
+  <p>
+    - written by <%= link_to comment.user.username, user_path(comment.user) %>
+    - added at <%= comment.created_at %>
+  </p>
 </article>

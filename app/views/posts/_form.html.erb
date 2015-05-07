@@ -1,19 +1,38 @@
-<%= form_for @post do |f| %>
+<%= form_for @post, html: {class: "form-horizontal"} do |f| %>
   <div class="form-group">
-    <%= f.label :title %>
-    <%= f.text_field :title, class: "form-control" %>
+    <%= f.label :title, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :title, class: "form-control" %>
+    </div>
   </div>
   <div class="form-group">
-    <%= f.label :url %>
-    <%= f.text_field :url, class: "form-control" %>
+    <%= f.label :url, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :url, class: "form-control" %>
+    </div>
   </div>
   <div class="form-group">
-    <%= f.label :description %>
-    <%= f.text_area :description, class: "form-control" %>
+    <%= f.label :description, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_area :description, class: "form-control" %>
+    </div>
   </div>
   <div class="form-group">
-    <%= f.label :category %>
-    <%= f.collection_check_boxes :category_ids, Category.all, :id, :name, class: "checkbox" %>
+    <%= f.label :category, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <div class="checkbox">
+        <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |box| %>
+          <%= box.label class: "checkbox" do %>
+            <%= box.check_box %>
+            <%= box.object.name %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
   </div>
-  <%= f.submit %>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit class: "btn btn-default" %>
+    </div>
+  </div>
 <% end %>
