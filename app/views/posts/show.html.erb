@@ -1,16 +1,17 @@
 <%= render @post %>
+
 <%# if correct_user? %>
-  <p><%= link_to 'edit post', edit_post_path(@post) %></p>
+  <%= link_to 'edit post', edit_post_path(@post), class: "btn btn-default" %>
 <%# end %>
 
-<p><%= link_to 'back to all posts', posts_path %></p>
+<%= link_to 'back to all posts', posts_path, class: "btn btn-default" %>
 
 <%= form_for [@post, Comment.new] do |f| %>
-  <div>
+  <div class="form-group">
     <%= f.label :comment %>
-    <%= f.text_area :body %>
+    <%= f.text_area :body, class: "form-control" %>
   </div>
-  <%= f.submit %>
+  <%= f.submit class: "btn btn-default" %>
 <% end %>
 
 <%= render @post.comments %>
