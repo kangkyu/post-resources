@@ -1,7 +1,9 @@
+<h2>Edit Profile</h2>
+
 <%= form_for @user do |f| %>
-  <div>
+  <div class="form-group">
     <%= f.label :username %>
-    <%= f.text_field :username %>
+    <%= f.text_field :username, class: "form-control" %>
   </div>
-  <%= f.submit %>
+  <%= f.submit class: "btn btn-default" %>
 <% end %>

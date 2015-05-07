@@ -1,9 +1,10 @@
-<h3>Welcome!</h3>
-
+<h2>Welcome!</h2>
+<p>
 <% if current_user %>
-  <%= link_to 'new category', new_category_path %>
-
-  <%= link_to 'new post', new_post_path %>
+  <%= link_to 'new category', new_category_path, class: "btn btn-default" %>
+  <%= link_to 'new post', new_post_path, class: "btn btn-default" %>
 <% end %>
-
-<%= render @posts %>
+</p>
+<div class="row">
+  <%= render @posts %>
+</div>

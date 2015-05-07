@@ -1,7 +1,1 @@
-<p class="category-name">
-  <% if @category && category == @category %>
-    <strong><%= link_to category.name, category %></strong>
-  <% else %>
-    <%= link_to category.name, category %>
-  <% end %>
-</p>
+<%= link_to content_tag(:span, category.name, class: (@category && category == @category ? "label label-primary" : "label label-default")), category %>

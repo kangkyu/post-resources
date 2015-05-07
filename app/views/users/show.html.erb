@@ -1,10 +1,8 @@
-<h1>User show</h1>
-<article>
-  <p><%= @user.username %></p>
-  <%# if correct_user?(@user) %>
-    <%= link_to 'edit user', edit_user_path(@user) %>
-  <%# end %>
-</article>
+<h2><%= @user.username %></h2>
+
+<%# if correct_user?(@user) %>
+  <%= link_to 'edit user', edit_user_path(@user), class: "btn btn-default" %>
+<%# end %>
 
 <h4><%= 'all comments' if @user.comments.any? %></h4>
 <%= render @user.comments %>
