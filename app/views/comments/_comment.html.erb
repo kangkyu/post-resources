@@ -1,7 +1,10 @@
 <article class="well">
   "<%= comment.body %>"
   <p>
-    - written by <%= link_to comment.user.username, user_path(comment.user) %>
-    - added at <%= comment.created_at %>
+    - written by <%= link_to comment.user.username, user_path(comment.user) %><br>
+    - added at <%= comment.created_at %><br>
+    <% if ["show"].include?(action_name) && ["users"].include?(controller_name) %>
+      - on post of <span><%= link_to comment.post.title, post_path(comment.post) %></span>
+    <% end %>
   </p>
 </article>

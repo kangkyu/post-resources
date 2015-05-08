@@ -43,9 +43,9 @@
         - added at <%= @post.created_at %>
       </p>
       <p><%= pluralize(@post.comments.size, 'Comment') %></p>
-      <%# if correct_user? %>
+      <% if correct_user?(@post.user) %>
         <%= link_to 'edit post', edit_post_path(@post), class: "btn btn-default" %>
-      <%# end %>
+      <% end %>
       <%= link_to 'back to all posts', posts_path, class: "btn btn-default" %>
     </div>
   </div>
@@ -63,4 +63,3 @@
 </div>
 
 <%= render @post.comments %>
-
