@@ -2,17 +2,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-body {
-  font-family: Verdana;
-}
+@import "posts";
 
-.label,
-.badge {
-  margin: 0 10px 0 0;
-  padding: 0.25em 0.5em 0.375em;
-  font-size: 0.875em;
-  font-weight: normal;
-  line-height: 1;
-  position: relative;
-  display: inline-block;
-}
+@import url('http://fonts.googleapis.com/css?family=Varela');
+@import url('http://fonts.googleapis.com/css?family=Droid+Sans:400,700');

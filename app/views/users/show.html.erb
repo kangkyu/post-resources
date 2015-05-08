@@ -8,4 +8,6 @@
 <%= render @user.comments %>
 
 <h4><%= 'all posts' if @user.posts.any? %></h4>
-<%= render @user.posts %>
+<div class="post-blocks">
+  <%= render @user.posts %>
+</div>
