@@ -1,21 +1,31 @@
-<ul class="nav navbar-nav navbar-right">
+<!-- <ul class="nav navbar-nav navbar-right">
   <li><a href="#">Link</a></li>
-</ul>
+</ul> -->
 
 <ul class="nav navbar-nav">
   <% if user_log_in? %>
-    <li>
-      <%= link_to 'logout', logout_path, method: :delete %>
-    </li>
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <%= link_to "Welcome, \"#{current_user.username}\"!", root_path, class: "navbar-brand" %>
+    </div>
+
     <li>
       <%= link_to 'profile', user_path(session[:user_id]) %>
     </li>
-  <% else %>
     <li>
-      <%= link_to 'login', login_path %>
+      <%= link_to 'logout', logout_path, method: :delete %>
     </li>
+  <% else %>
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <%= link_to "Postit!", root_path, class: "navbar-brand" %>
+    </div>
+
     <li>
       <%= link_to 'register', register_path %>
+    </li>
+    <li>
+      <%= link_to 'login', login_path %>
     </li>
   <% end %>
 </ul>
