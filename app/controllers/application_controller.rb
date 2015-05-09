@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user
     unless current_user
-      redirect_to root_url, error: "error. log-in please"
+      flash[:error] = "error. log-in please"
+      redirect_to login_url
     end
   end
 

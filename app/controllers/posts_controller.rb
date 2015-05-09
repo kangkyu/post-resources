@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user, except: [:index, :show]
+  before_action :authenticate_user, except: [:index, :show, :vote]
   before_action :load_post, only: [:update, :edit, :show, :vote]
   def index
     @posts = Post.all
@@ -35,7 +35,9 @@ class PostsController < ApplicationController
   end
 
   def vote
-    if @post.votes.where(user: current_user).count != 0
+    if !user_log_in?
+      flash[:error] = "error. login needed to vote"
+    elsif @post.votes.where(user: current_user).count != 0
       vote = @post.votes.find_by(user: current_user)
       vote.update(voted: params[:voted])
     else
