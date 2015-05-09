@@ -1,7 +1,8 @@
 module ApplicationHelper
 
   def external_url(url)
-    link_to "http://#{url}", target: "_blank" do
+    url = "http://#{url}" unless url.start_with?('http://', 'https://')
+    link_to url, target: "_blank" do
       yield
     end
   end
