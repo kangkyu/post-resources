@@ -53,6 +53,7 @@
   </div>
 </div>
 
+<% if user_log_in? %>
 <div class="well">
   <%= form_for [@post, Comment.new] do |f| %>
     <div class="form-group">
@@ -61,5 +62,7 @@
     <%= f.submit class: "btn btn-default" %>
   <% end %>
 </div>
+<% end %>
 
+<h4><%= 'post comments' if @post.comments.any? %></h4>
 <%= render @post.comments %>

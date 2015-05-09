@@ -1,12 +1,12 @@
-<div class="thumbnail" style="border-color:<%= random_color %>">
+<div class="thumbnail">
 
   <div class="caption">
     <%= link_to post do %>
       <h3><%= post.title %></h3>
     <% end %>
     <p>
-      <%= pluralize(post.votes.where(voted: true).count - post.votes.where(voted: false).count, 'Vote') %>
-      <%= pluralize(post.comments.size, 'Comment') %>
+      <span class="floats"><%= pluralize(post.votes.where(voted: true).count - post.votes.where(voted: false).count, 'Vote') %></span>
+      <span class="floats"><%= pluralize(post.comments.size, 'Comment') %></span>
     </p>
     <%= render post.categories %>
   </div>
