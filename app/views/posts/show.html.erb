@@ -1,32 +1,22 @@
 <div class="row">
-  <div class="col-sm-2">
+  <div class="col-sm-2 col-xs-3">
 
-  <div class="panel panel-default">
+  <div class="panel panel-default text-center">
+    <div class="panel-heading">
+      <%= caret_up_icon(@post) %>
+    </div>
     <div class="panel-body">
-      <% if current_user && @post.votes.where(user: current_user).take %>
-        <% if @post.votes.where(user: current_user).take.voted == true %>
-          <strong><%= link_to "vote plus", vote_post_path(@post, voted: nil), method: 'post' %></strong> |
-          <%= link_to "vote minus", vote_post_path(@post, voted: false), method: 'post' %> |
-        <% elsif @post.votes.where(user: current_user).take.voted == false %>
-          <%= link_to "vote plus", vote_post_path(@post, voted: true), method: 'post' %> |
-          <strong><%= link_to "vote minus", vote_post_path(@post, voted: nil), method: 'post' %></strong> |
-        <% else %>
-          <%= link_to "vote plus", vote_post_path(@post, voted: true), method: 'post' %> |
-          <%= link_to "vote minus", vote_post_path(@post, voted: false), method: 'post' %> |
-        <% end %>
-      <% else %>
-        <%= link_to "vote plus", vote_post_path(@post, voted: true), method: 'post' %> |
-        <%= link_to "vote minus", vote_post_path(@post, voted: false), method: 'post' %> |
-      <% end %>
+      <%= @post.votes.where(voted: true).count - @post.votes.where(voted: false).count %>
+      <%# @post.votes.count %>
+      <!-- counts -->
     </div>
-    <div class="panel-footer">
-      count <%= @post.votes.count %> |
-      net <%= @post.votes.where(voted: true).count - @post.votes.where(voted: false).count %>
+    <div class="panel-footer text-center">
+      <%= caret_down_icon(@post) %>
     </div>
   </div>
 
   </div>
-  <div class="col-sm-10">
+  <div class="col-sm-10 col-xs-9">
 
   <div class="panel panel-default">
     <div class="panel-heading">
