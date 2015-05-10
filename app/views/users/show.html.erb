@@ -4,10 +4,10 @@
   <%= link_to 'edit user', edit_user_path(@user), class: "btn btn-default" %>
 <% end %>
 
-<h4><%= 'user comments' if @user.comments.any? %></h4>
+<h4><%= pluralize(@user.comments.count, 'user comment') if @user.comments.any? %></h4>
 <%= render @user.comments %>
 
-<h4><%= 'user posts' if @user.posts.any? %></h4>
+<h4><%= pluralize(@user.posts.count, 'user post') if @user.posts.any? %></h4>
 <div class="post-blocks">
   <%= render @user.posts %>
 </div>
