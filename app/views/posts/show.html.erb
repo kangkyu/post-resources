@@ -21,18 +21,14 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <%= render @post.categories %>
-      <%= external_url @post.url do %>
-        <h2><%= @post.title %></h2>
-        <h4><%= @post.url %></h4>
-      <% end %>
+      <h2><%= link_to @post.title, external_url(@post.url), target: "_blank" %></h2>
+      <p>
+        - added at <%= @post.created_at %> by <%= link_to @post.user.username, user_path(@post.user) %>
+      </p>
     </div>
     <div class="panel-body">
+      <p><%= link_to @post.url, external_url(@post.url), target: "_blank" %></p>
       <p><%= simple_format @post.description %></p>
-      <p>
-        - written by <%= link_to @post.user.username, user_path(@post.user) %>
-        - added at <%= @post.created_at %>
-      </p>
-      <p><%= pluralize(@post.comments.size, 'Comment') %></p>
       <% if correct_user?(@post.user) %>
         <%= link_to 'edit post', edit_post_path(@post), class: "btn btn-default" %>
       <% end %>
