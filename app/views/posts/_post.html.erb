@@ -1,9 +1,7 @@
 <div class="thumbnail">
 
   <div class="caption">
-    <%= link_to post do %>
-      <h3><%= post.title %></h3>
-    <% end %>
+    <h3><%= link_to post.title, post %></h3>
     <p>
       <span class="floats"><%= pluralize(post.votes.where(voted: true).count - post.votes.where(voted: false).count, 'Vote') %></span>
       <span class="floats"><%= pluralize(post.comments.size, 'Comment') %></span>

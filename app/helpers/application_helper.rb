@@ -1,9 +1,10 @@
 module ApplicationHelper
 
   def external_url(url)
-    url = "http://#{url}" unless url.start_with?('http://', 'https://')
-    link_to url, target: "_blank" do
-      yield
+    if url.start_with?('http://', 'https://')
+      url
+    else
+      "http://#{url}"
     end
   end
 
