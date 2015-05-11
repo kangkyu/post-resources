@@ -5,6 +5,7 @@
   <%= link_to 'new post', new_post_path, class: "btn btn-default" %>
 <% end %>
 </p>
+<h4><%= pluralize(@category.posts.count, 'category post') if @category.posts.any? %></h4>
 <div class="post-blocks">
   <%= render @category.posts %>
 </div>
