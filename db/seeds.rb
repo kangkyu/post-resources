@@ -23,6 +23,7 @@ categories = Category.create!([
   { name: "free" },
   { name: "social" }
 ])
+Post.delete_all
 posts = Post.create!([
   { user: users.first,
     categories: [categories.first, categories.last],
