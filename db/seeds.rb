@@ -14,6 +14,7 @@ users = User.create!([
     password: "password",
     password_confirmation: "password" }
 ])
+# Category.delete_all
 categories = Category.create!([
   { name: "magazine" },
   { name: "tutorial" },
@@ -26,13 +27,11 @@ categories = Category.create!([
 Post.delete_all
 posts = Post.create!([
   { user: users.first,
-    categories: [categories.first, categories.last],
     url: "www.economist.com",
     title: "Economist",
     description: "World politics, Business & finance, Economics ...",
     category_ids: [1,3] },
   { user: users.first,
-    categories: [categories.first],
     url: "thedistance.com",
     title: "The Distance",
     description: "The Distance is a magazine that spotlights longevity in business.",
