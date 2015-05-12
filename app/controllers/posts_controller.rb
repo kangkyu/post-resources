@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user, except: [:index, :show, :vote]
   before_action :load_post, only: [:update, :edit, :show, :vote]
-  before_action :assign_category, only: [:create, :update]
+  after_action :assign_category, only: [:create, :update]
 
   def index
     @posts = Post.all
@@ -55,13 +55,17 @@ class PostsController < ApplicationController
   end
 
   def assign_category
-    load_post
+    # load_post
     words = @post.description.split
     words.each do |word|
       if word.start_with?("#")
-        @post.category = Category.find_or_create_by(name: word.slice(1..-1))
+        id_array = @post.category_ids
+        category = Category.find_or_create_by(name: word.slice(1..-1)) unless word.slice(1..-1).blank?
+        id_array.push category.id
+        @post.category_ids = id_array.uniq
       end
     end
+    @post.category_ids = @post.category_ids.uniq
   end
 
   private
