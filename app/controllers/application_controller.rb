@@ -25,7 +25,6 @@ class ApplicationController < ActionController::Base
     @current_user = nil
   end
 
-
   def correct_user?(user)
     current_user == user
   end

@@ -1,11 +1,14 @@
 class UsersController < ApplicationController
   before_action :authenticate_user, except: [:new, :create, :show]
   before_action :load_user, only: [:show, :edit, :update]
+
   def show
   end
+
   def new
     @user = User.new
   end
+
   def create
     @user = User.new(params.require(:user).permit(:username, :password, :password_confirmation))
     if @user.save
@@ -16,12 +19,14 @@ class UsersController < ApplicationController
       render action: 'new'
     end
   end
+
   def edit
     unless correct_user?(@user)
       flash[:error] = "error. can edit only current user"
       redirect_to user_url(@user)
     end
   end
+
   def update
     if correct_user?(@user) && @user.update(params.require(:user).permit(:username, :password, :password_confirmation))
       redirect_to user_url(@user), notice: "notice. user updated"
