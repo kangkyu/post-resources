@@ -1,1 +1,1 @@
-<%= link_to content_tag(:span, category.name, class: (@category && category == @category ? "label label-primary" : "label label-default")), category %>
+<%= link_to content_tag(:span, "#{category.name} #{category.posts.count}", class: (@category && category == @category ? "label label-primary" : "label label-default")), category %>
