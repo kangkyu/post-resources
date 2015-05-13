@@ -56,7 +56,7 @@ class PostsController < ApplicationController
 
   def assign_categories
     id_array = @post.category_ids
-    words = @post.description.split
+    words = @post.description.split(/[[:punct:]]/)
     words.each do |word|
       if word.start_with?("#") && word != "#"
         category = Category.find_or_create_by(name: word.slice(1..-1))
