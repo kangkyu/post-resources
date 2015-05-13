@@ -1,3 +1,3 @@
 ### Postit!
 
-Online Resources Info Website started from Tealeaf Academy Assignment.
+Online Resources Info Website, originally started as a Tealeaf Academy Assignment.
