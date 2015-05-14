@@ -1,0 +1,6 @@
+one:
+  username: "username one"
+  password_digest: <%= User.digest('password') %>
+two:
+  username: "username two"
+  password_digest: <%= User.digest('password') %>
