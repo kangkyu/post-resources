@@ -8,7 +8,7 @@ class Post < ActiveRecord::Base
 
   has_many :votes, as: :votable
 
-  def hashtags
+  def hashtag_words
     self.description.split
     .select{|word| word != "#" && word.start_with?("#")}
     .map{|word| word.gsub!(/[[:punct:]]/, '')}

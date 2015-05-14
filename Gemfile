@@ -31,3 +31,5 @@ group :production do
 end
 
 gem 'bcrypt-ruby', '~> 3.1.0'
+
+gem 'minitest-rails', "~> 1.0", group: :test

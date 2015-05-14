@@ -56,7 +56,7 @@ class PostsController < ApplicationController
 
   def assign_categories
     id_array = @post.category_ids
-    @post.hashtags.each do |word|
+    @post.hashtag_words.each do |word|
       id_array << Category.find_or_create_by(name: word).id
     end
     @post.category_ids = id_array.uniq
