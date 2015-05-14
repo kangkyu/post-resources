@@ -61,6 +61,12 @@ GEM
     method_source (0.8.2)
     mime-types (2.5)
     minitest (4.7.5)
+    minitest-rails (1.0.1)
+      minitest (~> 4.7)
+      minitest-test (~> 1.0)
+      railties (>= 3.0, < 4.1)
+    minitest-test (1.1.0)
+      minitest (~> 4.0)
     multi_json (1.11.0)
     pg (0.18.1)
     pry (0.10.1)
@@ -131,6 +137,7 @@ DEPENDENCIES
   font-awesome-rails (~> 4.3.0.0)
   jbuilder (~> 1.2)
   jquery-rails
+  minitest-rails (~> 1.0)
   pg
   pry
   quiet_assets

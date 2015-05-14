@@ -1,0 +1,7 @@
+# Read about fixtures at
+# http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: Railscasts
+  url: http://railscasts.com/
+  description: Ruby on Rails screencasts

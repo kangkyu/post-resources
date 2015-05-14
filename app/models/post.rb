@@ -7,4 +7,10 @@ class Post < ActiveRecord::Base
   validates :title, presence: true
 
   has_many :votes, as: :votable
+
+  def hashtag_words
+    self.description.split
+    .select{|word| word != "#" && word.start_with?("#")}
+    .map{|word| word.gsub!(/[[:punct:]]/, '')}
+  end
 end

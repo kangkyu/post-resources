@@ -56,12 +56,8 @@ class PostsController < ApplicationController
 
   def assign_categories
     id_array = @post.category_ids
-    words = @post.description.split
-    words.each do |word|
-      if word.start_with?("#") && word != "#"
-        category = Category.find_or_create_by(name: word.slice(1..-1))
-        id_array.push category.id
-      end
+    @post.hashtag_words.each do |word|
+      id_array << Category.find_or_create_by(name: word).id
     end
     @post.category_ids = id_array.uniq
   end

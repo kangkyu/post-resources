@@ -14,16 +14,17 @@ users = User.create!([
     password: "password",
     password_confirmation: "password" }
 ])
-# Category.delete_all
-categories = Category.create!([
-  { name: "magazine" },
-  { name: "tutorial" },
-  { name: "news" },
-  { name: "Ruby" },
-  { name: "Rails" },
-  { name: "free" },
-  { name: "social" }
-])
+
+[ "magazine",
+  "tutorial",
+  "news",
+  "Ruby",
+  "Rails",
+  "free",
+  "social" ].each do |name|
+    Category.find_or_create_by!(name: name)
+  end
+
 Post.delete_all
 posts = Post.create!([
   { user: users.first,
