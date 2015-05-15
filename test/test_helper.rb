@@ -10,6 +10,10 @@ require "minitest/rails"
 # Uncomment for awesome colorful output
 # require "minitest/pride"
 
+require "minitest/reporters"
+Minitest::Reporters.use!(Minitest::Reporters::DefaultReporter.new(:color => true))
+
+
 class ActiveSupport::TestCase
   ActiveRecord::Migration.check_pending!
 
