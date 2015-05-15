@@ -4,3 +4,9 @@
 require File.expand_path('../config/application', __FILE__)
 
 PostitTemplate::Application.load_tasks
+
+# https://github.com/blowmage/minitest-rails-capybara#running-tests
+Rails::TestTask.new("test:features" => "test:prepare") do |t|
+  t.pattern = "test/features/**/*_test.rb"
+end
+Rake::Task["test:run"].enhance ["test:features"]
