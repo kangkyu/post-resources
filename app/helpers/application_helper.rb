@@ -40,4 +40,32 @@ module ApplicationHelper
     end
   end
 
+  def caret_up_icon_comment(post, comment)
+    if current_user && comment.votes.where(user: current_user).take
+      if comment.votes.where(user: current_user).take.voted == true
+        link_to fa_icon("caret-up 2x", style: "color: OrangeRed;"), vote_post_comment_path(post, comment, voted: nil), method: 'post'
+      elsif comment.votes.where(user: current_user).take.voted == false
+        link_to fa_icon("caret-up 2x", style: "color: gray;"), vote_post_comment_path(post, comment, voted: true), method: 'post'
+      else
+        link_to fa_icon("caret-up 2x", style: "color: gray;"), vote_post_comment_path(post, comment, voted: true), method: 'post'
+      end
+    else
+      link_to fa_icon("caret-up 2x", style: "color: gray;"), vote_post_comment_path(post, comment, voted: true), method: 'post'
+    end
+  end
+
+  def caret_down_icon_comment(post, comment)
+    if current_user && comment.votes.where(user: current_user).take
+      if comment.votes.where(user: current_user).take.voted == true
+        link_to fa_icon("caret-down 2x", style: "color: gray;"), vote_post_comment_path(post, comment, voted: false), method: 'post'
+      elsif comment.votes.where(user: current_user).take.voted == false
+        link_to fa_icon("caret-down 2x", style: "color: OrangeRed;"), vote_post_comment_path(post, comment, voted: nil), method: 'post'
+      else
+        link_to fa_icon("caret-down 2x", style: "color: gray;"), vote_post_comment_path(post, comment, voted: false), method: 'post'
+      end
+    else
+      link_to fa_icon("caret-down 2x", style: "color: gray;"), vote_post_comment_path(post, comment, voted: false), method: 'post'
+    end
+  end
+
 end

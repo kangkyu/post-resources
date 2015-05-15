@@ -61,6 +61,6 @@ ActiveRecord::Schema.define(version: 20150512212935) do
     t.integer  "user_id"
   end
 
-  add_index "votes", ["votable_id", "user_id"], name: "index_votes_on_votable_id_and_user_id", unique: true
+  add_index "votes", ["votable_id", "user_id"], name: "index_votes_on_votable_id_and_user_id"
 
 end

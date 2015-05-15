@@ -1,10 +1,30 @@
-<article class="well">
-  "<%= comment.body %>"
-  <p>
-    - written by <%= link_to comment.user.username, user_path(comment.user) %><br>
-    - added at <%= comment.created_at %><br>
-    <% if ["show"].include?(action_name) && ["users"].include?(controller_name) %>
-      - on post of <span><%= link_to comment.post.title, post_path(comment.post) %></span>
-    <% end %>
-  </p>
-</article>
+<div class="row">
+  <div class="col-sm-2 col-xs-3">
+    <div class="panel panel-default text-center">
+      <div class="panel-heading">
+        <%= caret_up_icon_comment(@post, comment) %>
+      </div>
+      <div class="panel-body">
+        <%= comment.votes.where(voted: true).count - comment.votes.where(voted: false).count %>
+        <%# comment.votes.count %>
+        <!-- counts -->
+      </div>
+      <div class="panel-footer text-center">
+        <%= caret_down_icon_comment(@post, comment) %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-10 col-xs-9">
+    <article class="well">
+      "<%= comment.body %>"
+      <p>
+        - written by <%= link_to comment.user.username, user_path(comment.user) %><br>
+        - added at <%= comment.created_at %><br>
+        <% if ["show"].include?(action_name) && ["users"].include?(controller_name) %>
+          - on post of <span><%= link_to comment.post.title, post_path(comment.post) %></span>
+        <% end %>
+      </p>
+    </article>
+  </div>
+</div>
+
