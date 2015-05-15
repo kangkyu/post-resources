@@ -54,14 +54,6 @@ class PostsController < ApplicationController
     redirect_to post_url(@post)
   end
 
-  def assign_categories
-    id_array = @post.category_ids
-    @post.hashtag_words.each do |word|
-      id_array << Category.find_or_create_by(name: word).id
-    end
-    @post.category_ids = id_array.uniq
-  end
-
   private
 
   def load_post
@@ -70,5 +62,13 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:url, :title, :description, category_ids: [])
+  end
+
+  def assign_categories
+    id_array = @post.category_ids
+    @post.hashtag_words.each do |word|
+      id_array << Category.find_or_create_by(name: word).id
+    end
+    @post.category_ids = id_array.uniq
   end
 end
