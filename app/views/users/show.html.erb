@@ -1,13 +1,23 @@
-<h2><%= @user.username %></h2>
+<%= render 'shared/title', title: @user.username %>
 
 <% if correct_user?(@user) %>
+<p class="text-right">
   <%= link_to 'edit user', edit_user_path(@user), class: "btn btn-default" %>
+</p>
 <% end %>
 
-<h4><%= pluralize(@user.comments.count, 'user comment') if @user.comments.any? %></h4>
-<%= render @user.comments %>
+<% if @user.comments.any? %>
+  <h4><%= pluralize(@user.comments.count, 'user comment') %></h4>
+  <%= render @user.comments %>
+<% end %>
 
 <h4><%= pluralize(@user.posts.count, 'user post') if @user.posts.any? %></h4>
 <div class="post-blocks">
-  <%= render @user.posts %>
+  <div class="thumbnail">
+    <div class="caption">
+      <%= link_to content_tag(:span, "all #{Post.count}", class: ( ["index"].include?(action_name) && ["posts"].include?(controller_name) ? "label label-danger" : "label label-default")), posts_path %>
+      <%= render Category.all %>
+    </div>
+  </div>
+  <%= render @user.posts if @user.posts.any? %>
 </div>

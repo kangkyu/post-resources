@@ -24,10 +24,10 @@
       <div class="row">
         <div class="col-md-12">
           <%= render 'layouts/messages' %>
-          <div class="well">
-            <%= link_to content_tag(:span, "all #{Post.count}", class: ( ["index"].include?(action_name) && ["posts"].include?(controller_name) ? "label label-danger" : "label label-default")), posts_path %>
-            <%= render Category.all %>
-          </div>
+          <!-- <div class="well"> -->
+            <%#= link_to content_tag(:span, "all #{Post.count}", class: ( ["index"].include?(action_name) && ["posts"].include?(controller_name) ? "label label-danger" : "label label-default")), posts_path %>
+            <%#= render Category.all %>
+          <!-- </div> -->
 
           <%= yield %>
         </div>

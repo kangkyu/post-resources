@@ -1,11 +1,19 @@
-<h2>Category: <%= @category.name %></h2>
-<p>
+<%= render 'shared/title', title: "Category: #{@category.name}" %>
+
 <% if current_user %>
+<p class="text-right">
   <%= link_to 'new category', new_category_path, class: "btn btn-default" %>
   <%= link_to 'new post', new_post_path, class: "btn btn-default" %>
-<% end %>
 </p>
+<% end %>
+
 <h4><%= pluralize(@category.posts.count, 'category post') if @category.posts.any? %></h4>
 <div class="post-blocks">
-  <%= render @category.posts %>
+  <div class="thumbnail">
+    <div class="caption">
+      <%= link_to content_tag(:span, "all #{Post.count}", class: ( ["index"].include?(action_name) && ["posts"].include?(controller_name) ? "label label-danger" : "label label-default")), posts_path %>
+      <%= render Category.all %>
+    </div>
+  </div>
+  <%= render @category.posts if @category.posts.any? %>
 </div>
