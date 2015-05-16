@@ -1,4 +1,4 @@
-<h2>Log-in</h2>
+<%= render 'shared/title', title: 'Log-in' %>
 
 <%= form_for :login, url: login_path do |f| %>
   <div class="form-group">
@@ -9,5 +9,5 @@
     <%= f.label :password %>
     <%= f.password_field :password, class: "form-control" %>
   </div>
-  <%= f.submit "Login", class: "btn btn-default" %>
+  <div class="text-right"><%= f.submit "Login", class: "btn btn-default" %></div>
 <% end %>
