@@ -1,13 +1,11 @@
 <%= render 'shared/title', title: "Category: #{@category.name}" %>
 
-<% if current_user %>
 <p class="text-right">
-  <%= link_to 'new category', new_category_path, class: "btn btn-default" %>
-  <%= link_to 'new post', new_post_path, class: "btn btn-default" %>
+  <%= link_to 'back to all posts', posts_path, class: "btn btn-default" %>
 </p>
-<% end %>
 
 <h4><%= pluralize(@category.posts.count, 'category post') if @category.posts.any? %></h4>
+
 <div class="post-blocks">
   <div class="thumbnail">
     <div class="caption">

@@ -1,3 +1,5 @@
+<%= render 'shared/title', title: @post.title %>
+
 <p class="text-right">
   <% if correct_user?(@post.user) %>
     <%= link_to 'edit post', edit_post_path(@post), class: "btn btn-default" %>
