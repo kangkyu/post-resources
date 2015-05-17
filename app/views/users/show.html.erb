@@ -9,17 +9,30 @@
 
 <% if @user.comments.any? %>
   <h4><%= pluralize(@user.comments.count, 'user comment') %></h4>
-  <%= render @user.comments %>
+  <% @user.comments.each do |comment| %>
+  <div class="panel panel-default">
+    <%= link_to post_path(comment.post) do %>
+    <div class="panel-body">
+      "<%= comment.body %>"
+    </div>
+    <% end %>
+    <div class="panel-footer">
+    <p>
+      <span class="floats"><%= pluralize(comment.votes.where(voted: true).count - comment.votes.where(voted: false).count, 'Vote') %></span>
+    </p>
+      <p>
+        - added at <%= comment.created_at %><br>
+        <% if ["show"].include?(action_name) && ["users"].include?(controller_name) %>
+          - on post of <span><%= link_to comment.post.title, post_path(comment.post) %></span>
+        <% end %>
+      </p>
+    </div>
+  </div>
+  <% end %>
 <% end %>
 
 <h4><%= pluralize(@user.posts.count, 'user post') if @user.posts.any? %></h4>
 
 <div class="post-blocks">
-  <div class="thumbnail">
-    <div class="caption">
-      <%= link_to content_tag(:span, "all #{Post.count}", class: ( ["index"].include?(action_name) && ["posts"].include?(controller_name) ? "label label-danger" : "label label-default")), posts_path %>
-      <%= render Category.all %>
-    </div>
-  </div>
   <%= render @user.posts if @user.posts.any? %>
 </div>
