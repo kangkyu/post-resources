@@ -13,59 +13,34 @@ module ApplicationHelper
   end
 
   def caret_up_icon(post)
-    if current_user && post.votes.where(user: current_user).take
-      if post.votes.where(user: current_user).take.voted == true
-        link_to fa_icon("caret-up 2x", style: "color: OrangeRed;"), vote_post_path(post, voted: nil), method: 'post'
-      elsif post.votes.where(user: current_user).take.voted == false
-        link_to fa_icon("caret-up 2x", style: "color: gray;"), vote_post_path(post, voted: true), method: 'post'
-      else
-        link_to fa_icon("caret-up 2x", style: "color: gray;"), vote_post_path(post, voted: true), method: 'post'
-      end
+    if current_user && post.votes.where(user: current_user).take && post.votes.where(user: current_user).take.voted == true
+      link_to fa_icon("caret-up 2x", style: "color: OrangeRed;"), vote_post_path(post, voted: nil), method: 'post'
     else
       link_to fa_icon("caret-up 2x", style: "color: gray;"), vote_post_path(post, voted: true), method: 'post'
     end
   end
 
   def caret_down_icon(post)
-    if current_user && post.votes.where(user: current_user).take
-      if post.votes.where(user: current_user).take.voted == true
-        link_to fa_icon("caret-down 2x", style: "color: gray;"), vote_post_path(post, voted: false), method: 'post'
-      elsif post.votes.where(user: current_user).take.voted == false
+    if current_user && post.votes.where(user: current_user).take && post.votes.where(user: current_user).take.voted == false
         link_to fa_icon("caret-down 2x", style: "color: OrangeRed;"), vote_post_path(post, voted: nil), method: 'post'
-      else
-        link_to fa_icon("caret-down 2x", style: "color: gray;"), vote_post_path(post, voted: false), method: 'post'
-      end
     else
       link_to fa_icon("caret-down 2x", style: "color: gray;"), vote_post_path(post, voted: false), method: 'post'
     end
   end
 
   def caret_up_icon_comment(post, comment)
-    if current_user && comment.votes.where(user: current_user).take
-      if comment.votes.where(user: current_user).take.voted == true
-        link_to fa_icon("caret-up 2x", style: "color: OrangeRed;"), vote_post_comment_path(post, comment, voted: nil), method: 'post'
-      elsif comment.votes.where(user: current_user).take.voted == false
-        link_to fa_icon("caret-up 2x", style: "color: gray;"), vote_post_comment_path(post, comment, voted: true), method: 'post'
-      else
-        link_to fa_icon("caret-up 2x", style: "color: gray;"), vote_post_comment_path(post, comment, voted: true), method: 'post'
-      end
+    if current_user && comment.votes.where(user: current_user).take && comment.votes.where(user: current_user).take.voted == true
+      link_to fa_icon("caret-up 2x", style: "color: OrangeRed;"), vote_post_comment_path(post, comment, voted: nil), method: 'post'
     else
       link_to fa_icon("caret-up 2x", style: "color: gray;"), vote_post_comment_path(post, comment, voted: true), method: 'post'
     end
   end
 
   def caret_down_icon_comment(post, comment)
-    if current_user && comment.votes.where(user: current_user).take
-      if comment.votes.where(user: current_user).take.voted == true
-        link_to fa_icon("caret-down 2x", style: "color: gray;"), vote_post_comment_path(post, comment, voted: false), method: 'post'
-      elsif comment.votes.where(user: current_user).take.voted == false
-        link_to fa_icon("caret-down 2x", style: "color: OrangeRed;"), vote_post_comment_path(post, comment, voted: nil), method: 'post'
-      else
-        link_to fa_icon("caret-down 2x", style: "color: gray;"), vote_post_comment_path(post, comment, voted: false), method: 'post'
-      end
+    if current_user && comment.votes.where(user: current_user).take && comment.votes.where(user: current_user).take.voted == false
+      link_to fa_icon("caret-down 2x", style: "color: OrangeRed;"), vote_post_comment_path(post, comment, voted: nil), method: 'post'
     else
       link_to fa_icon("caret-down 2x", style: "color: gray;"), vote_post_comment_path(post, comment, voted: false), method: 'post'
     end
   end
-
 end
