@@ -1,9 +1,13 @@
 <%= render 'shared/title', title: 'Edit Profile' %>
 
 <%= form_for @user do |f| %>
+  <div class="text-right"><%= f.submit class: "btn btn-default" %></div>
   <div class="form-group">
     <%= f.label :username %>
     <%= f.text_field :username, class: "form-control" %>
   </div>
-  <div class="text-right"><%= f.submit class: "btn btn-default" %></div>
 <% end %>
+
+<p class="text-right">
+  <%= link_to "Back", user_path(@user), class: "btn btn-default" %>
+</p>
