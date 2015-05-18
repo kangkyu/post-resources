@@ -2,8 +2,7 @@
 
 <%= render 'form' %>
 
-<div class="text-right">
-  <%= button_to @post, method: :delete, class: "btn btn-danger", data: { confirm: "click \"OK\" to delete" } do %>
-    Delete Post
-  <% end %>
-</div>
+<p class="text-right">
+  <%= link_to "Delete Post", @post, method: :delete, class: "btn btn-danger", data: { confirm: "click \"OK\" to delete" } %>
+  <%= link_to "Back", post_path(@post), class: "btn btn-default" %>
+</p>
