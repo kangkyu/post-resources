@@ -1,7 +1,12 @@
 class PostsController < ApplicationController
   before_action :authenticate_user, except: [:index, :show, :vote]
-  before_action :load_post, only: [:update, :edit, :show, :vote]
+  before_action :load_post, only: [:update, :edit, :show, :vote, :destroy]
   after_action :assign_categories, only: [:create, :update]
+
+  def destroy
+    @post.destroy
+    redirect_to posts_url, notice: "notice. post deleted"
+  end
 
   def index
     @posts = Post.all

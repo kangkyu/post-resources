@@ -12,7 +12,7 @@ PostitTemplate::Application.routes.draw do
 
   get 'register' => 'users#new'
 
-  resources :posts, except: :destroy do
+  resources :posts do
     # post 'comments' => 'comments#create'
     resources :comments, only: [:create, :vote] do
       member do
