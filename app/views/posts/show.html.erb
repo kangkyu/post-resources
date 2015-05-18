@@ -32,7 +32,7 @@
       <%= render @post.categories %>
       <h2><%= link_to @post.title, external_url(@post.url), target: "_blank" %></h2>
       <p>
-        - added at <%= @post.created_at %> by <%= link_to @post.user.username, user_path(@post.user) %>
+        - added <%= time_ago_in_words @post.created_at %> ago by <%= link_to @post.user.username, user_path(@post.user) %>
       </p>
     </div>
     <div class="panel-body">
