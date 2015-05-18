@@ -1,3 +1,9 @@
 <%= render 'shared/title', title: 'Edit Post' %>
 
 <%= render 'form' %>
+
+<div class="text-right">
+  <%= button_to @post, method: :delete, class: "btn btn-danger", data: { confirm: "click \"OK\" to delete" } do %>
+    Delete Post
+  <% end %>
+</div>
