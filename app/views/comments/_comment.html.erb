@@ -6,7 +6,7 @@
       <%= caret_up_icon_comment(comment.post, comment) %>
     </div>
     <div class="panel-body">
-      <%= comment.votes.where(voted: true).count - comment.votes.where(voted: false).count %>
+      <%= net_votes(comment) %>
       <%# comment.votes.count %>
       <!-- counts -->
     </div>
@@ -35,4 +35,3 @@
 
   </div>
 </div>
-
