@@ -36,6 +36,12 @@ article {
   h3 {
     font-size: 19px;
     padding: 2px;
+    margin: 10px 0 6px;
+  }
+  h2 {
+    font-size: 28px;
+    padding: 3px;
+    margin: 10px 0 6px;
   }
   p {
     font-size: 15px;
@@ -43,6 +49,16 @@ article {
     .floats {
       display: inline-block;
       position: relative;
+    }
+  }
+}
+
+.vote-panel {
+  width:52px;height:100%;margin-right:14px;margin-bottom:6px;float:left;display:inline;
+  .panel-body {
+    padding:8px;
+    p {
+      margin:0px;
     }
   }
 }

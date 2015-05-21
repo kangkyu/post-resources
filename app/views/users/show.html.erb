@@ -8,28 +8,9 @@
 </p>
 
 <h4><%= pluralize(@user.comments.count, 'user comment') %></h4>
-<% if @user.comments.any? %>
-  <% @user.comments.each do |comment| %>
-  <div class="panel panel-default">
-    <%= link_to post_path(comment.post) do %>
-    <div class="panel-body">
-      "<%= comment.body %>"
-    </div>
-    <% end %>
-    <div class="panel-footer">
-    <p>
-      <span class="floats"><%= pluralize(net_votes(comment), 'Vote') %></span>
-    </p>
-      <p>
-        - added at <%= comment.created_at %><br>
-        <% if ["show"].include?(action_name) && ["users"].include?(controller_name) %>
-          - on post of <span><%= link_to comment.post.title, post_path(comment.post) %></span>
-        <% end %>
-      </p>
-    </div>
-  </div>
-  <% end %>
-<% end %>
+<!-- <div class="comment-blocks"> -->
+  <%= render @user.comments if @user.comments.any? %>
+<!-- </div> -->
 
 <h4><%= pluralize(@user.posts.count, 'user post') %></h4>
 <div class="post-blocks">
