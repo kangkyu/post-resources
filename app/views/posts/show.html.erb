@@ -15,7 +15,7 @@
       <%= caret_up_icon(@post) %>
     </div>
     <div class="panel-body">
-      <%= @post.votes.where(voted: true).count - @post.votes.where(voted: false).count %>
+      <%= net_votes(@post) %>
       <%# @post.votes.count %>
       <!-- counts -->
     </div>
@@ -55,7 +55,5 @@
 </div>
 <% end %>
 
-<% if @post.comments.any? %>
-  <h4><%= pluralize(@post.comments.count, 'post comment') %></h4>
-  <%= render @post.comments %>
-<% end %>
+<h4><%= pluralize(@post.comments.count, 'post comment') %></h4>
+<%= render @post.comments if @post.comments.any? %>

@@ -7,8 +7,8 @@
   <%= link_to 'back to all posts', posts_path, class: "btn btn-default" %>
 </p>
 
+<h4><%= pluralize(@user.comments.count, 'user comment') %></h4>
 <% if @user.comments.any? %>
-  <h4><%= pluralize(@user.comments.count, 'user comment') %></h4>
   <% @user.comments.each do |comment| %>
   <div class="panel panel-default">
     <%= link_to post_path(comment.post) do %>
@@ -18,7 +18,7 @@
     <% end %>
     <div class="panel-footer">
     <p>
-      <span class="floats"><%= pluralize(comment.votes.where(voted: true).count - comment.votes.where(voted: false).count, 'Vote') %></span>
+      <span class="floats"><%= pluralize(net_votes(comment), 'Vote') %></span>
     </p>
       <p>
         - added at <%= comment.created_at %><br>
@@ -31,8 +31,7 @@
   <% end %>
 <% end %>
 
-<h4><%= pluralize(@user.posts.count, 'user post') if @user.posts.any? %></h4>
-
+<h4><%= pluralize(@user.posts.count, 'user post') %></h4>
 <div class="post-blocks">
   <%= render @user.posts if @user.posts.any? %>
 </div>
