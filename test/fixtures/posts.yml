@@ -5,3 +5,4 @@ one:
   title: Railscasts
   url: http://railscasts.com/
   description: Ruby on Rails screencasts
+  user: one
