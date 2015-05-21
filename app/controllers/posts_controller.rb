@@ -9,7 +9,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    @posts = Post.order('updated_at desc').preload(:comments, :votes, :categories)
   end
 
   def show
