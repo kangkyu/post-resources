@@ -19,4 +19,11 @@ class LoginController < ApplicationController
     user_log_out
     redirect_to root_url, notice: "notice. user logged out"
   end
+
+  private
+
+  def user_log_out
+    session.delete(:user_id)
+    @current_user = nil
+  end
 end

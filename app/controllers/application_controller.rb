@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def authenticate_user
-    unless current_user
+    unless user_log_in?
       flash[:error] = "error. log-in please"
       redirect_to login_url
     end
@@ -19,14 +19,4 @@ class ApplicationController < ActionController::Base
     !current_user.nil?
   end
   helper_method :user_log_in?
-
-  def user_log_out
-    session.delete(:user_id)
-    @current_user = nil
-  end
-
-  def correct_user?(user)
-    current_user == user
-  end
-  helper_method :correct_user?
 end

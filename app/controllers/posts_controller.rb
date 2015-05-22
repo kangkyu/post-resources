@@ -4,8 +4,16 @@ class PostsController < ApplicationController
   after_action :assign_categories, only: [:create, :update]
 
   def destroy
-    @post.destroy
-    redirect_to posts_url, notice: "notice. post deleted"
+    if user_log_in? && user_authorized?
+      @post.destroy
+      redirect_to posts_url, notice: "notice. post deleted"
+    elsif user_log_in?
+      flash[:error] = "error. not the user added this post"
+      render template: 'posts/show'
+    else
+      flash[:error] = "error. log-in please"
+      redirect_to login_url
+    end
   end
 
   def index
@@ -31,18 +39,26 @@ class PostsController < ApplicationController
   end
 
   def edit
-    unless correct_user?(@post.user)
+    unless user_authorized? && user_log_in?
       flash[:error] = "error. not the user added this post"
       render template: 'posts/show'
     end
   end
 
   def update
-    if correct_user?(@post.user) && @post.update(post_params)
-      redirect_to post_url(@post), notice: "notice. post updated"
+    if user_log_in? && user_authorized?
+      if @post.update(post_params)
+        redirect_to post_url(@post), notice: "notice. post updated"
+      else
+        flash[:error] = "error. not updated"
+        render action: "edit"
+      end
+    elsif user_log_in?
+      flash[:error] = "error. not the user added this post"
+      render template: 'posts/show'
     else
-      flash[:error] = "error. not updated"
-      render action: "edit"
+      flash[:error] = "error. log-in please"
+      redirect_to login_url
     end
   end
 
@@ -76,5 +92,9 @@ class PostsController < ApplicationController
       id_array << Category.find_or_create_by(name: word).id
     end
     @post.category_ids = id_array.uniq
+  end
+
+  def user_authorized?
+    current_user == @post.user
   end
 end

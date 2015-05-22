@@ -1,6 +1,6 @@
 <%= render 'shared/title', title: 'Welcome!' %>
 
-<% if current_user %>
+<% if user_log_in? %>
   <p class="text-right">
     <%= link_to 'new category', new_category_path, class: "btn btn-default" %>
     <%= link_to 'new post', new_post_path, class: "btn btn-default" %>
