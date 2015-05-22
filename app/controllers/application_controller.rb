@@ -19,9 +19,4 @@ class ApplicationController < ActionController::Base
     !current_user.nil?
   end
   helper_method :user_log_in?
-
-  def correct_user?(user)
-    user_log_in? && current_user == user
-  end
-  helper_method :correct_user?
 end
