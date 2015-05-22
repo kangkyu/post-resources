@@ -1,9 +1,13 @@
-<div class="panel panel-default">
+<div class="panel panel-default comment-panel">
   <div class="panel-body">
 
 <% if ["show"].include?(action_name) && ["users"].include?(controller_name) %>
 
-  <p><strong>"<%= comment.body %>"</strong> (on <span><%= link_to comment.post.title, post_path(comment.post) %></span>)</p>
+  <h4>"<%= comment.body %>"</h4>
+  <p>
+    <span class="floats">on <%= link_to comment.post.title, post_path(comment.post) %>,</span>
+    <span class="floats"><%= pluralize(net_votes(comment), 'vote') %></span>
+  </p>
   <p class="text-right">
     - added <%= time_ago_in_words comment.created_at %> ago
   </p>
@@ -12,15 +16,16 @@
 
   <div class="panel panel-default text-center vote-panel">
     <div class="panel-body">
-      <p><%= caret_up_icon_comment(comment.post, comment) %></p>
+      <p><%= caret_up_icon_comment(comment) %></p>
       <p><%= net_votes(comment) %></p>
-      <p><%= caret_down_icon_comment(comment.post, comment) %></p>
+      <p><%= caret_down_icon_comment(comment) %></p>
     </div>
   </div>
 
-  <h3>"<%= comment.body %>"</h3>
+  <h4>"<%= comment.body %>"</h4>
   <p class="text-right">
-    - added <%= time_ago_in_words comment.created_at %> ago by <%= link_to comment.user.username, user_path(comment.user) %>
+    <span class="floats">- added <%= time_ago_in_words comment.created_at %> ago,</span>
+    <span class="floats">by <%= link_to comment.user.username, user_path(comment.user) %></span>
   </p>
 
 <% end %>

@@ -36,7 +36,7 @@ article {
   h3 {
     font-size: 19px;
     padding: 2px;
-    margin: 10px 0 6px;
+    margin: 8px 0 4px;
   }
   h2 {
     font-size: 28px;
@@ -44,17 +44,33 @@ article {
     margin: 10px 0 6px;
   }
   p {
-    font-size: 15px;
+    font-size: 14px;
     padding: 0px;
-    .floats {
-      display: inline-block;
-      position: relative;
-    }
   }
 }
 
+.comment-panel {
+  display: inline-block;
+  width: 100%;
+  h4 {
+    font-size: 18px;
+    padding: 2px;
+    margin: 6px 0 4px;
+  }
+}
+
+.floats {
+  display: inline-block;
+  position: relative;
+}
+
 .vote-panel {
-  width:52px;height:100%;margin-right:14px;margin-bottom:6px;float:left;display:inline;
+  width:52px;
+  height:100%;
+  margin-right:14px;
+  margin-bottom:6px;
+  float:left;
+  display:inline;
   .panel-body {
     padding:8px;
     p {
@@ -82,5 +98,19 @@ article {
     -webkit-column-count: 2;
     -moz-column-count: 2;
     column-count: 2;
+  }
+}
+
+.comment-blocks {
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+  column-count: 2;
+}
+
+@media only screen and (max-width: 768px) {
+  .comment-blocks {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
   }
 }

@@ -1,10 +1,9 @@
 <div class="thumbnail">
-
   <div class="caption">
     <h3><%= link_to post.title, post %></h3>
     <p>
-      <span class="floats"><%= pluralize(net_votes(post), 'Vote') %></span>
-      <span class="floats"><%= pluralize(post.comments.size, 'Comment') %></span>
+      <span class="floats"><%= pluralize(net_votes(post), 'vote') %>,</span>
+      <span class="floats"><%= pluralize(post.comments.size, 'comment') %></span>
     </p>
     <%= render post.categories %>
   </div>

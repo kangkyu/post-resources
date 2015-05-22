@@ -8,9 +8,9 @@
 </p>
 
 <h4><%= pluralize(@user.comments.count, 'user comment') %></h4>
-<!-- <div class="comment-blocks"> -->
+<div class="comment-blocks">
   <%= render @user.comments if @user.comments.any? %>
-<!-- </div> -->
+</div>
 
 <h4><%= pluralize(@user.posts.count, 'user post') %></h4>
 <div class="post-blocks">
