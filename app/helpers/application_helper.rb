@@ -16,7 +16,7 @@ module ApplicationHelper
     votable.votes.where(voted: true).count - votable.votes.where(voted: false).count
   end
 
-  def caret_up_icon(post)
+  def caret_up_icon_post(post)
     if current_user && post.votes.where(user: current_user).take && post.votes.where(user: current_user).take.voted == true
       link_to fa_icon("caret-up 2x", style: "color: OrangeRed;"), vote_post_path(post, voted: nil), method: 'post'
     else
@@ -24,27 +24,27 @@ module ApplicationHelper
     end
   end
 
-  def caret_down_icon(post)
+  def caret_down_icon_post(post)
     if current_user && post.votes.where(user: current_user).take && post.votes.where(user: current_user).take.voted == false
-        link_to fa_icon("caret-down 2x", style: "color: OrangeRed;"), vote_post_path(post, voted: nil), method: 'post'
+      link_to fa_icon("caret-down 2x", style: "color: OrangeRed;"), vote_post_path(post, voted: nil), method: 'post'
     else
       link_to fa_icon("caret-down 2x", style: "color: gray;"), vote_post_path(post, voted: false), method: 'post'
     end
   end
 
-  def caret_up_icon_comment(post, comment)
+  def caret_up_icon_comment(comment)
     if current_user && comment.votes.where(user: current_user).take && comment.votes.where(user: current_user).take.voted == true
-      link_to fa_icon("caret-up 2x", style: "color: OrangeRed;"), vote_post_comment_path(post, comment, voted: nil), method: 'post'
+      link_to fa_icon("caret-up 2x", style: "color: OrangeRed;"), vote_post_comment_path(comment.post, comment, voted: nil), method: 'post'
     else
-      link_to fa_icon("caret-up 2x", style: "color: gray;"), vote_post_comment_path(post, comment, voted: true), method: 'post'
+      link_to fa_icon("caret-up 2x", style: "color: gray;"), vote_post_comment_path(comment.post, comment, voted: true), method: 'post'
     end
   end
 
-  def caret_down_icon_comment(post, comment)
+  def caret_down_icon_comment(comment)
     if current_user && comment.votes.where(user: current_user).take && comment.votes.where(user: current_user).take.voted == false
-      link_to fa_icon("caret-down 2x", style: "color: OrangeRed;"), vote_post_comment_path(post, comment, voted: nil), method: 'post'
+      link_to fa_icon("caret-down 2x", style: "color: OrangeRed;"), vote_post_comment_path(comment.post, comment, voted: nil), method: 'post'
     else
-      link_to fa_icon("caret-down 2x", style: "color: gray;"), vote_post_comment_path(post, comment, voted: false), method: 'post'
+      link_to fa_icon("caret-down 2x", style: "color: gray;"), vote_post_comment_path(comment.post, comment, voted: false), method: 'post'
     end
   end
 end
