@@ -2,10 +2,8 @@ class CommentsController < ApplicationController
   before_action :authenticate_user
 
   def create
-    # fail
     @post = Post.find(params[:post_id])
-    comment = @post.comments.build(params.require(:comment).permit(:body))
-    comment.user_id = session[:user_id]
+    comment = @post.comments.build(comment_params.merge(user_id: session[:user_id]))
     if comment.save
       redirect_to @post, notice: "notice. comment added"
     else
@@ -15,17 +13,14 @@ class CommentsController < ApplicationController
   end
 
   def vote
-    @post = Post.find(params[:post_id])
     @comment = Comment.find(params[:id])
-    if !user_log_in?
-      flash[:error] = "error. login needed to vote"
-    elsif @comment.votes.where(user: current_user).count != 0
-      vote = @comment.votes.find_by(user: current_user)
-      vote.update(voted: params[:voted])
-    else
-      vote = @comment.votes.build(voted: params[:voted], user: current_user)
-      vote.save
-    end
+    vote_votable(@comment, params[:voted])
     redirect_to post_url(@comment.post)
+  end
+
+  private
+
+  def comment_params
+    params.require(:comment).permit(:body)
   end
 end

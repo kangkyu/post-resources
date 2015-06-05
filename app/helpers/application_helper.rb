@@ -20,35 +20,13 @@ module ApplicationHelper
     votable.votes.where(voted: true).count - votable.votes.where(voted: false).count
   end
 
-  def caret_up_icon_post(post)
-    if current_user && post.votes.where(user: current_user).take && post.votes.where(user: current_user).take.voted == true
-      link_to fa_icon("caret-up 2x", style: "color: OrangeRed;"), vote_post_path(post, voted: nil), method: 'post'
+  def caret_vote_icon(votable, direction = :up)
+    is_up = direction == :up || direction != :down
+    if current_user && votable.votes.where(user: current_user).take && votable.votes.where(user: current_user).take.voted == is_up
+      # if current_user already voted to this votable, color up-arrow or down-arrow for which direction voted to.
+      link_to fa_icon((is_up ? "caret-up 2x" : "caret-down 2x"), style: "color: OrangeRed;"), {controller: votable.class.to_s.downcase.pluralize, id: votable, voted: nil, action: 'vote'}, method: 'post'
     else
-      link_to fa_icon("caret-up 2x", style: "color: gray;"), vote_post_path(post, voted: true), method: 'post'
-    end
-  end
-
-  def caret_down_icon_post(post)
-    if current_user && post.votes.where(user: current_user).take && post.votes.where(user: current_user).take.voted == false
-      link_to fa_icon("caret-down 2x", style: "color: OrangeRed;"), vote_post_path(post, voted: nil), method: 'post'
-    else
-      link_to fa_icon("caret-down 2x", style: "color: gray;"), vote_post_path(post, voted: false), method: 'post'
-    end
-  end
-
-  def caret_up_icon_comment(comment)
-    if current_user && comment.votes.where(user: current_user).take && comment.votes.where(user: current_user).take.voted == true
-      link_to fa_icon("caret-up 2x", style: "color: OrangeRed;"), vote_post_comment_path(comment.post, comment, voted: nil), method: 'post'
-    else
-      link_to fa_icon("caret-up 2x", style: "color: gray;"), vote_post_comment_path(comment.post, comment, voted: true), method: 'post'
-    end
-  end
-
-  def caret_down_icon_comment(comment)
-    if current_user && comment.votes.where(user: current_user).take && comment.votes.where(user: current_user).take.voted == false
-      link_to fa_icon("caret-down 2x", style: "color: OrangeRed;"), vote_post_comment_path(comment.post, comment, voted: nil), method: 'post'
-    else
-      link_to fa_icon("caret-down 2x", style: "color: gray;"), vote_post_comment_path(comment.post, comment, voted: false), method: 'post'
+      link_to fa_icon((is_up ? "caret-up 2x" : "caret-down 2x"), style: "color: gray;"), {controller: votable.class.to_s.downcase.pluralize, id: votable, voted: is_up, action: 'vote'}, method: 'post'
     end
   end
 end
