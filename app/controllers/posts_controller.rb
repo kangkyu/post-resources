@@ -64,7 +64,11 @@ class PostsController < ApplicationController
 
   def vote
     vote_votable(@post, params[:voted])
-    redirect_to post_url(@post)
+
+    respond_to do |format|
+      format.html { redirect_to post_url(@post) }
+      format.js {}
+    end
   end
 
   private

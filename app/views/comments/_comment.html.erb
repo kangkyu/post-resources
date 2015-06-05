@@ -17,7 +17,7 @@
   <div class="panel panel-default text-center vote-panel">
     <div class="panel-body">
       <p><%= caret_vote_icon(comment, :up) %></p>
-      <p><%= net_votes(comment) %></p>
+      <p id="comment_<%= comment.id %>_vote"><%= net_votes(comment) %></p>
       <p><%= caret_vote_icon(comment, :down) %></p>
     </div>
   </div>

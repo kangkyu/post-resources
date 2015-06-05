@@ -11,7 +11,7 @@
     <div class="panel panel-default text-center vote-panel">
       <div class="panel-body">
         <p><%= caret_vote_icon(@post, :up) %></p>
-        <p><%= net_votes(@post) %></p>
+        <p id="post_<%= @post.id %>_vote"><%= net_votes(@post) %></p>
         <p><%= caret_vote_icon(@post, :down) %></p>
       </div>
     </div>

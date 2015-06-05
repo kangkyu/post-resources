@@ -15,7 +15,11 @@ class CommentsController < ApplicationController
   def vote
     @comment = Comment.find(params[:id])
     vote_votable(@comment, params[:voted])
-    redirect_to post_url(@comment.post)
+
+    respond_to do |format|
+      format.html { redirect_to post_url(@comment.post) }
+      format.js {}
+    end
   end
 
   private
