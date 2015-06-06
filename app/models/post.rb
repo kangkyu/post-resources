@@ -8,6 +8,8 @@ class Post < ActiveRecord::Base
 
   has_many :votes, as: :votable
 
+  include Votable
+
   def hashtag_words
     self.description.split
     .select{|word| word != "#" && word.start_with?("#")}
