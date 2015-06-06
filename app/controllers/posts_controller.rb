@@ -2,6 +2,8 @@ class PostsController < ApplicationController
   before_action :authenticate_user, except: [:index, :show, :vote]
   before_action :load_post, only: [:update, :edit, :show, :vote, :destroy]
 
+  include Votables
+
   def destroy
     if user_log_in? && user_authorized?
       @post.destroy

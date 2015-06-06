@@ -1,6 +1,8 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user
 
+  include Votables
+
   def create
     @post = Post.find(params[:post_id])
     comment = @post.comments.build(comment_params.merge(user_id: session[:user_id]))
