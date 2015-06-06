@@ -20,6 +20,9 @@ module PostitTemplate
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    # add extra fields that need to be filtered from logs
+    # config.filter_parameters += [:password, :ssn]
+
     # Tealeaf note: Bootstrap sass gem addition
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
   end
