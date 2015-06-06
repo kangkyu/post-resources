@@ -22,8 +22,10 @@ module ApplicationHelper
 
   def caret_vote_icon(votable, direction = :up)
     is_up = direction == :up || direction != :down
-    if current_user && votable.votes.where(user: current_user).take && votable.votes.where(user: current_user).take.voted == is_up
-      # if current_user already voted to this votable, color up-arrow or down-arrow for which direction voted to.
+    # if current_user already voted to this votable, color up-arrow or down-arrow for which direction voted to.
+    if current_user &&
+        votable.votes.where(user: current_user).take &&
+          votable.votes.where(user: current_user).take.voted == is_up
       link_to fa_icon((is_up ? "caret-up 2x" : "caret-down 2x"), style: "color: OrangeRed;"), {controller: votable.class.to_s.downcase.pluralize, id: votable, voted: nil, action: 'vote'}, method: 'post', remote: true
     else
       link_to fa_icon((is_up ? "caret-up 2x" : "caret-down 2x"), style: "color: gray;"), {controller: votable.class.to_s.downcase.pluralize, id: votable, voted: is_up, action: 'vote'}, method: 'post', remote: true
