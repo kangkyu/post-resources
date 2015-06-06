@@ -13,4 +13,14 @@ class Post < ActiveRecord::Base
     .select{|word| word != "#" && word.start_with?("#")}
     .map{|word| word.gsub!(/[[:punct:]]/, '')}
   end
+
+  # to_param :title
+  # http://api.rubyonrails.org/classes/ActiveRecord/Integration/ClassMethods.html#method-i-to_param
+  def to_param
+    if (param = title.to_s.squish.truncate(20, separator: /\s/, omission: nil).parameterize).present?
+      "#{id}-#{param}"
+    else
+      super()
+    end
+  end
 end

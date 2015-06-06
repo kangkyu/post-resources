@@ -1,0 +1,5 @@
+// alert("hi");
+
+$("#post_<%= @post.id %>_vote").html(function(){
+  return "<%= net_votes(@post) %>";
+});

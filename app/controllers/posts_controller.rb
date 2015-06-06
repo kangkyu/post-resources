@@ -63,16 +63,12 @@ class PostsController < ApplicationController
   end
 
   def vote
-    if !user_log_in?
-      flash[:error] = "error. login needed to vote"
-    elsif @post.votes.where(user: current_user).count != 0
-      vote = @post.votes.find_by(user: current_user)
-      vote.update(voted: params[:voted])
-    else
-      vote = @post.votes.build(voted: params[:voted], user: current_user)
-      vote.save
+    vote_votable(@post, params[:voted])
+
+    respond_to do |format|
+      format.html { redirect_to post_url(@post) }
+      format.js {}
     end
-    redirect_to post_url(@post)
   end
 
   private

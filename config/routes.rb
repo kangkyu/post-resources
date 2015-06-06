@@ -13,18 +13,18 @@ PostitTemplate::Application.routes.draw do
   get 'register' => 'users#new'
 
   resources :posts do
-    # post 'comments' => 'comments#create'
-    resources :comments, only: [:create, :vote] do
-      member do
-        post 'vote'
-      end
-    end
-    # post 'posts/:id/comments/:id/vote'
-    # resources :votes  # POST 'posts/:post_id/votes'
-    member do
-      post 'vote'       # POST 'posts/:id/vote'
-    end
+    # POST '/posts/:post_id/comments' => 'comments#create'
+    resources :comments, only: [:create]
   end
 
   resources :users
+
+  concern :votable do
+    post 'vote', on: :member
+  end
+  # POST '/comments/:id/vote'
+  resources :comments, only: [:vote], concerns: :votable
+  # POST '/posts/:id/vote'
+  resources :posts, only: [:vote], concerns: :votable
+
 end
