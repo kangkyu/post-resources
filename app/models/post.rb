@@ -6,8 +6,6 @@ class Post < ActiveRecord::Base
 
   validates :title, presence: true
 
-  has_many :votes, as: :votable
-
   include Votable
 
   def hashtag_words
