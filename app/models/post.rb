@@ -23,4 +23,13 @@ class Post < ActiveRecord::Base
       super()
     end
   end
+
+  def assign_categories
+    id_array = self.category_ids
+    self.hashtag_words.each do |word|
+      word.downcase!
+      id_array << Category.find_or_create_by(name: word).id
+    end
+    self.category_ids = id_array.uniq
+  end
 end

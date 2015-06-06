@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user, except: [:index, :show, :vote]
   before_action :load_post, only: [:update, :edit, :show, :vote, :destroy]
-  after_action :assign_categories, only: [:create, :update]
 
   def destroy
     if user_log_in? && user_authorized?
@@ -30,7 +29,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = session[:user_id]
-    if @post.save
+    if @post.save && @post.assign_categories
       redirect_to post_url(@post), notice: "notice. post added"
     else
       flash[:error] = "error. not saved"
@@ -47,7 +46,7 @@ class PostsController < ApplicationController
 
   def update
     if user_log_in? && user_authorized?
-      if @post.update(post_params)
+      if @post.update(post_params) && @post.assign_categories
         redirect_to post_url(@post), notice: "notice. post updated"
       else
         flash[:error] = "error. not updated"
@@ -79,15 +78,6 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:url, :title, :description, category_ids: [])
-  end
-
-  def assign_categories
-    id_array = @post.category_ids
-    @post.hashtag_words.each do |word|
-      word.downcase!
-      id_array << Category.find_or_create_by(name: word).id
-    end
-    @post.category_ids = id_array.uniq
   end
 
   def user_authorized?
