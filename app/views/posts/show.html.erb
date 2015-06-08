@@ -37,11 +37,12 @@
 
 <% if user_log_in? %>
 <div class="well">
-  <%= form_for [@post, Comment.new] do |f| %>
+  <%= form_for [@post, @post.comments.new] do |f| %>
     <div class="form-group">
+      <%= f.label :body %>
       <%= f.text_area :body, class: "form-control" %>
     </div>
-    <div class="text-right"><%= f.submit class: "btn btn-default" %></div>
+    <div class="text-right"><%= f.submit 'Add Comment', class: "btn btn-default" %></div>
   <% end %>
 </div>
 <% end %>
