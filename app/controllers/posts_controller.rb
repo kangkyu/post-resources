@@ -30,7 +30,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @post.user_id = session[:user_id]
+    @post.user_id = current_user.id
     if @post.save && @post.assign_categories
       redirect_to post_url(@post), notice: "notice. post added"
     else

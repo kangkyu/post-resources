@@ -6,7 +6,7 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @category = Category.new(params.require(:category).permit(:name))
+    @category = Category.new(category_params)
     @category.name.downcase!
     if @category.save
       redirect_to root_url, notice: "notice. category added"
@@ -18,5 +18,11 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
+  end
+
+  private
+
+  def category_params
+    params.require(:category).permit(:name)
   end
 end

@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
 
   def create
     @post = Post.find(params[:post_id])
-    comment = @post.comments.build(comment_params.merge(user_id: session[:user_id]))
+    comment = @post.comments.build(comment_params.merge(user_id: current_user.id))
     if comment.save
       redirect_to @post, notice: "notice. comment added"
     else
