@@ -75,7 +75,13 @@ class PostsController < ApplicationController
   private
 
   def load_post
-    @post = Post.find(params[:id])
+    @post = Post.all.select do |post|
+      post.to_param == params[:id]
+    end.first
+    unless @post
+      flash[:error] = "slug error"
+      redirect_to root_url
+    end
   end
 
   def post_params

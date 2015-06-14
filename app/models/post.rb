@@ -18,7 +18,7 @@ class Post < ActiveRecord::Base
   # http://api.rubyonrails.org/classes/ActiveRecord/Integration/ClassMethods.html#method-i-to_param
   def to_param
     if (param = title.to_s.squish.truncate(20, separator: /\s/, omission: nil).parameterize).present?
-      "#{id}-#{param}"
+      param
     else
       super()
     end

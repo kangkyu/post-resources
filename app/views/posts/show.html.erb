@@ -1,5 +1,5 @@
 <p class="text-right">
-  <% if correct_user?(@post.user) %>
+  <% if @post && correct_user?(@post.user) %>
     <%= link_to 'edit post', edit_post_path(@post), class: "btn btn-default" %>
   <% end %>
   <%= link_to 'back to all posts', posts_path, class: "btn btn-default" %>
