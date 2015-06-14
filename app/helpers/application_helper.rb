@@ -22,15 +22,15 @@ module ApplicationHelper
     if current_user &&
         votable.votes.where(user: current_user).take &&
           votable.votes.where(user: current_user).take.voted == is_up
-      link_to({controller: votable.class.to_s.downcase.pluralize, id: votable, voted: nil, action: 'vote'}, method: 'post', remote: true, class: (is_up && votable.is_a?(Post) ? "vote-up-post" : "vote-down-post")) do
-        (is_up && votable.is_a?(Post) ? "up" : "down")
-        # fa_icon((is_up ? "caret-up 2x" : "caret-down 2x"), style: "color: OrangeRed;")
-      end
+      # link_to({controller: votable.class.to_s.downcase.pluralize, id: votable, voted: nil, action: 'vote'}, method: 'post', remote: true, class: (is_up && votable.is_a?(Post) ? "vote-up-post" : "vote-down-post")) do
+      #   (is_up && votable.is_a?(Post) ? "up" : "down")
+      # end
+      link_to fa_icon((is_up ? "caret-up 2x" : "caret-down 2x"), style: "color: OrangeRed;"), {controller: votable.class.to_s.downcase.pluralize, id: votable, voted: nil, action: 'vote'}, method: 'post'
     else
-      link_to({controller: votable.class.to_s.downcase.pluralize, id: votable, voted: is_up, action: 'vote'}, method: 'post', remote: true) do
-        (is_up && votable.is_a?(Post) ? "up" : "down")
-        # fa_icon((is_up ? "caret-up 2x" : "caret-down 2x"), style: "color: gray;")
-      end
+      # link_to({controller: votable.class.to_s.downcase.pluralize, id: votable, voted: is_up, action: 'vote'}, method: 'post', remote: true) do
+      #   (is_up && votable.is_a?(Post) ? "up" : "down")
+      # end
+      link_to fa_icon((is_up ? "caret-up 2x" : "caret-down 2x"), style: "color: gray;"), {controller: votable.class.to_s.downcase.pluralize, id: votable, voted: is_up, action: 'vote'}, method: 'post'
     end
   end
 end

@@ -2,6 +2,7 @@ require 'test_helper'
 
 class VotePostsTest < Capybara::Rails::TestCase
   test "vote at posts show page" do
+    skip
     visit login_path
     fill_in "Username", with: users(:one).username
     fill_in "Password", with: 'password'
