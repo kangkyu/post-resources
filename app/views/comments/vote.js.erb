@@ -1,4 +1,4 @@
 
 $("#comment_<%= @comment.id %>_vote").html(function(){
-  return "<%= net_votes(@comment) %>";
+  return "<%= @comment.net_votes %>";
 });

@@ -10,7 +10,7 @@
     </div>
 
     <li>
-      <%= link_to 'profile', user_path(session[:user_id]) %>
+      <%= link_to 'profile', current_user %>
     </li>
     <li>
       <%= link_to 'logout', logout_path, method: :delete %>

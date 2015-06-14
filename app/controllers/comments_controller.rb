@@ -1,9 +1,11 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user
 
+  include Votables
+
   def create
-    @post = Post.find(params[:post_id])
-    comment = @post.comments.build(comment_params.merge(user_id: session[:user_id]))
+    set_post(params[:post_id])
+    comment = @post.comments.build(comment_params.merge(user_id: current_user.id))
     if comment.save
       redirect_to @post, notice: "notice. comment added"
     else
@@ -26,5 +28,15 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:body)
+  end
+
+  def set_post(id_param)
+    @post = Post.all.select do |post|
+      post.to_param == id_param
+    end.first
+    unless @post
+      flash[:error] = "slug error"
+      redirect_to root_url
+    end
   end
 end
