@@ -14,12 +14,12 @@ class CommentsController < ApplicationController
 
   def vote
     @comment = Comment.find(params[:id])
-    vote_votable(@comment, params[:voted])
-
-    respond_to do |format|
-      format.html { redirect_to post_url(@comment.post) }
-      format.js {}
+    if user_log_in?
+      @comment.voted_by(current_user, params[:voted])
+    else
+      flash[:error] = "error. login needed to vote"
     end
+    redirect_to post_url(@comment.post)
   end
 
   private
