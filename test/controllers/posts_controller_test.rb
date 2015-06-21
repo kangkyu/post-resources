@@ -39,7 +39,7 @@ class PostsControllerTest < ActionController::TestCase
       session[:user_id] = posts(:one).user.id
 
       assert_difference 'Post.count', -1 do
-        delete :destroy, id: posts(:one).id
+        delete :destroy, id: posts(:one).to_param
       end
     end
 
@@ -59,7 +59,7 @@ class PostsControllerTest < ActionController::TestCase
       new_post_category_ids = [categories(:one).id, categories(:three).id].sort
 
       assert_no_difference 'Post.count' do
-        patch :update, id: original_post.id, post: new_post_hash
+        patch :update, id: original_post.to_param, post: new_post_hash
            .merge(category_ids: new_post_category_ids)
       end
       assert_equal "updated title", users(:one).posts.first.title
@@ -149,7 +149,7 @@ class PostsControllerTest < ActionController::TestCase
       new_post_category_ids = [categories(:one).id, categories(:three).id].sort
 
       assert_no_difference 'Post.count' do
-        patch :update, id: original_post.id, post: new_post_hash
+        patch :update, id: original_post.to_param, post: new_post_hash
            .merge(category_ids: new_post_category_ids)
       end
       assert_not_equal "updated title", users(:two).posts.first.title

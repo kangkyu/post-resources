@@ -6,11 +6,7 @@ class Post < ActiveRecord::Base
 
   validates :title, presence: true
 
-  has_many :votes, as: :votable
-
-  def net_votes
-    votes.where(voted: true).count - votes.where(voted: false).count
-  end
+  include Votable
 
   def voted_by(user, voted)
     votes.find_or_initialize_by(user: user, votable_type: "Post")
@@ -27,7 +23,7 @@ class Post < ActiveRecord::Base
   # http://api.rubyonrails.org/classes/ActiveRecord/Integration/ClassMethods.html#method-i-to_param
   def to_param
     if (param = title.to_s.squish.truncate(20, separator: /\s/, omission: nil).parameterize).present?
-      "#{id}-#{param}"
+      param
     else
       super()
     end

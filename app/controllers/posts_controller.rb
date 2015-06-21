@@ -2,6 +2,8 @@ class PostsController < ApplicationController
   before_action :authenticate_user, except: [:index, :show, :vote]
   before_action :load_post, only: [:update, :edit, :show, :vote, :destroy]
 
+  include Votables
+
   def destroy
     if user_log_in? && user_authorized?
       @post.destroy
@@ -28,7 +30,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @post.user_id = session[:user_id]
+    @post.user_id = current_user.id
     if @post.save && @post.assign_categories
       redirect_to post_url(@post), notice: "notice. post added"
     else
@@ -73,7 +75,13 @@ class PostsController < ApplicationController
   private
 
   def load_post
-    @post = Post.find(params[:id])
+    @post = Post.all.select do |post|
+      post.to_param == params[:id]
+    end.first
+    unless @post
+      flash[:error] = "slug error"
+      redirect_to root_url
+    end
   end
 
   def post_params
