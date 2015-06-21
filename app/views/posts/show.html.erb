@@ -10,9 +10,9 @@
 
     <div class="panel panel-default text-center vote-panel">
       <div class="panel-body">
-        <p><%= caret_vote_icon(@post, :up) %></p>
+        <p><%= vote_up_arrow(@post) %></p>
         <p id="post_<%= @post.id %>_vote"><%= @post.net_votes %></p>
-        <p><%= caret_vote_icon(@post, :down) %></p>
+        <p><%= vote_down_arrow(@post) %></p>
       </div>
     </div>
 
