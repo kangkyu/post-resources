@@ -18,50 +18,43 @@ module ApplicationHelper
   end
 
 # refactoring today
-  def caret_vote_icon(votable, direction = :up)
-    if direction == :up
-      vote_up_arrow(votable)
-    elsif direction == :down
-      vote_down_arrow(votable)
-    else
-    end
-  end
 
-  def condition(votable)
-    if user_log_in? && (user_vote = current_user.votes.where(votable: votable).take)
-      if user_vote.voted == true
-        :two
-      elsif user_vote.voted == false
-        :three
-      else
-        :one
-      end
-    else
-      :one
-    end
+  def vote_up_arrow(votable)
+    name_of_icon = "caret-up 2x"
+    vote_of_icon = true
+    color_condition = user_log_in? && current_user.upvoted?(votable)
+
+    arrow_helper(name_of_icon, vote_of_icon, votable, color_condition)
   end
 
   def vote_down_arrow(votable)
     name_of_icon = "caret-down 2x"
     vote_of_icon = false
+    color_condition = user_log_in? && current_user.downvoted?(votable)
 
-    case condition(votable)
-    when :three
-      link_to fa_icon(name_of_icon, style: "color: OrangeRed;"), {voted: nil, controller: votable.class.to_s.downcase.pluralize, id: votable, action: 'vote'}, method: 'post'
-    else
-      link_to fa_icon(name_of_icon, style: "color: gray;"), {voted: vote_of_icon, controller: votable.class.to_s.downcase.pluralize, id: votable, action: 'vote'}, method: 'post'
-    end
+    arrow_helper(name_of_icon, vote_of_icon, votable, color_condition)
   end
 
-  def vote_up_arrow(votable)
-    name_of_icon = "caret-up 2x"
-    vote_of_icon = true
+  def arrow_helper(name_of_icon, vote_of_icon, votable, color_condition)
 
-    case condition(votable)
-    when :two
-      link_to fa_icon(name_of_icon, style: "color: OrangeRed;"), {voted: nil, controller: votable.class.to_s.downcase.pluralize, id: votable, action: 'vote'}, method: 'post'
+    if color_condition
+      link_to fa_icon(name_of_icon, style: "color: OrangeRed;"),
+        {
+          voted: nil,
+          controller: votable.class.to_s.downcase.pluralize,
+          id: votable,
+          action: 'vote'
+        },
+        method: 'post'
     else
-      link_to fa_icon(name_of_icon, style: "color: gray;"), {voted: vote_of_icon, controller: votable.class.to_s.downcase.pluralize, id: votable, action: 'vote'}, method: 'post'
+      link_to fa_icon(name_of_icon, style: "color: gray;"),
+        {
+          voted: vote_of_icon,
+          controller: votable.class.to_s.downcase.pluralize,
+          id: votable,
+          action: 'vote'
+        },
+        method: 'post'
     end
   end
 end
