@@ -8,11 +8,6 @@ class Post < ActiveRecord::Base
 
   include Votable
 
-  def voted_by(user, voted)
-    votes.find_or_initialize_by(user: user, votable_type: "Post")
-        .update(voted: voted)
-  end
-
   def hashtag_words
     self.description.split
     .select{|word| word != "#" && word.start_with?("#")}
