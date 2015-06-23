@@ -1,3 +1,5 @@
+<% provide(:post_slug, @post.to_param) %>
+
 <p class="text-right">
   <% if @post && correct_user?(@post.user) %>
     <%= link_to 'edit post', edit_post_path(@post), class: "btn btn-default" %>
