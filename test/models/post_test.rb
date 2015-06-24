@@ -37,5 +37,8 @@ class PostTest < ActiveSupport::TestCase
 
     another_post = Post.new(title: "post", url: "www.example.com")
     refute another_post.valid?
+
+    another_post = Post.new(title: "post", url: "http://example.com/")
+    refute another_post.valid?, "we don't need '/' at the end"
   end
 end

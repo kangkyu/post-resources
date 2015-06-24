@@ -40,5 +40,6 @@ class Post < ActiveRecord::Base
     return if url.nil?
     self.url = url.split('://').slice(1) if url.start_with?('http://', 'https://')
     self.url = url.split('.').slice(1..-1).join('.') if url.start_with?('www')
+    self.url = url.chomp('/')
   end
 end
