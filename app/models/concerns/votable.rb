@@ -6,7 +6,15 @@ module Votable
   end
 
   def net_votes
-    votes.where(voted: true).count - votes.where(voted: false).count
+    up_votes - down_votes
+  end
+
+  def up_votes
+    votes.where(voted: true).count
+  end
+
+  def down_votes
+    votes.where(voted: false).count
   end
 
   def voted_by(user, voted)
