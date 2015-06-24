@@ -26,4 +26,16 @@ class PostTest < ActiveSupport::TestCase
     assert_equal ["free", "Ruby", "news"], post.hashtag_words
   end
 
+  def test_valid_with_unique_url
+    post = Post.create!(title: "post", url: "example.com")
+
+    another_post = Post.new(title: "post", url: "http://example.com")
+    refute another_post.valid?
+
+    another_post = Post.new(title: "post", url: "http://www.example.com")
+    refute another_post.valid?
+
+    another_post = Post.new(title: "post", url: "www.example.com")
+    refute another_post.valid?
+  end
 end
