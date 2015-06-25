@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user, except: [:new, :create, :show]
   before_action :load_user, only: [:show, :edit, :update]
+  before_action :authorize_user, only: [:edit, :update]
 
   def show
   end
@@ -10,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(params.require(:user).permit(:username, :password, :password_confirmation))
+    @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
       redirect_to root_url, notice: "notice. registered and logged in"
@@ -21,25 +22,14 @@ class UsersController < ApplicationController
   end
 
   def edit
-    if user_authorized? && user_log_in?
-      render 'users/edit'
-    else
-      flash[:error] = 'error. not the current user'
-      redirect_to user_url(@user)
-    end
   end
 
   def update
-    if user_authorized? && user_log_in?
-      if @user.update(params.require(:user).permit(:username, :password, :password_confirmation))
-        redirect_to user_url(@user), notice: "notice. user updated"
-      else
-        flash[:error] = "error. not updated"
-        render action: 'edit'
-      end
+    if @user.update(user_params)
+      redirect_to user_url(@user), notice: "notice. user updated"
     else
-      flash[:error] = 'error. not the current user'
-      redirect_to user_url(@user)
+      flash[:error] = "error. not updated"
+      render action: 'edit'
     end
   end
 
@@ -49,8 +39,18 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def user_params
+    params.require(:user).permit(:username, :password, :password_confirmation)
+  end
+
+  def authorize_user
+    unless user_authorized?
+      flash[:error] = "error. not the current user"
+      redirect_to user_url(@user)
+    end
+  end
+
   def user_authorized?
     current_user == @user
   end
-
 end
