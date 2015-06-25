@@ -1,6 +1,6 @@
 <div class="thumbnail">
   <div class="caption">
-    <h3><%= link_to post.title, post %></h3>
+    <h3><%= link_to post.title, post, class: "my-btn" %></h3>
     <p>
       <span class="floats"><%= pluralize(post.net_votes, 'vote') %>,</span>
       <span class="floats"><%= pluralize(post.comments.size, 'comment') %></span>
