@@ -1,5 +1,27 @@
+// http://www.colourlovers.com/palette/15/tech_light
+$palette-green: #D1E751;
+$palette-dark: #000000;
+$palette-light: #26ADE4;
+$palette-white: #FFFFFF;
+$palette-super-light: #4DBCE9;
+
 body {
   font-family: 'Merriweather Sans', Verdana, Sans-Serif;
+}
+
+.navbar.navbar-inverse {
+  // background-image: none;
+  @include button-variant($palette-dark, $palette-green, $palette-white);
+  border-radius: 0;
+}
+
+a.my-btn {
+  // @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+  @include button-variant($palette-dark, transparent, $palette-white);
+  &:hover {
+    text-decoration: none;
+    color: $palette-white;
+  }
 }
 
 .label,
@@ -13,6 +35,25 @@ body {
   display: inline-block;
 }
 
+.label-default {
+  background-color: $palette-dark;
+  &:hover {
+    background-color: $palette-green;
+  }
+}
+.label-primary {
+  background-color: $palette-green;
+}
+.label-all-default {
+  background-color: $palette-dark;
+  &:hover {
+    background-color: #d9534f;
+  }
+}
+.label-all-primary {
+   background-color: #d9534f;
+}
+
 article {
   border: 1px solid;
   max-width: 500px;
@@ -22,14 +63,20 @@ article {
 
 
 .thumbnail {
-  background-color: AliceBlue;
-  border: 2px solid SlateGray;
+  border: 2px solid $palette-dark;
   border-radius: 0%;
   display: inline-block;
   width: 100%;
 /*  img {
     width: 100%;
   }*/
+  &:hover {
+    background-color: $palette-super-light;
+    border-color: $palette-dark;
+  }
+  .caption {
+    color: $palette-dark;
+  }
 }
 
 .caption {

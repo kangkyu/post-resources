@@ -1,4 +1,4 @@
-<%= render 'shared/title', title: "Category: #{@category.name}" %>
+<%= render 'shared/title', title: "#\"#{@category.name}\"" %>
 
 <p class="text-right">
   <%= link_to 'back to all posts', posts_path, class: "btn btn-default" %>
@@ -8,7 +8,7 @@
 <div class="post-blocks">
   <div class="thumbnail">
     <div class="caption">
-      <%= link_to content_tag(:span, "all #{Post.count}", class: "label label-default"), posts_path %>
+      <%= link_to content_tag(:span, "all #{Post.count}", class: "label label-all-default"), posts_path %>
       <%= render Category.all %>
     </div>
   </div>
