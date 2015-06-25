@@ -1,10 +1,10 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user
+  before_action :authenticate_user, except: :vote
+  before_action :set_post, only: :create
 
   include Votables
 
   def create
-    set_post(params[:post_id])
     comment = @post.comments.build(comment_params.merge(user_id: current_user.id))
     if comment.save
       redirect_to @post, notice: "notice. comment added"
@@ -30,9 +30,9 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:body)
   end
 
-  def set_post(id_param)
+  def set_post
     @post = Post.all.select do |post|
-      post.to_param == id_param
+      post.to_param == params[:post_id]
     end.first
     unless @post
       flash[:error] = "slug error"
