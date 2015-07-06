@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
 
   def vote
     @comment = Comment.find(params[:id])
-    if user_log_in?
+    if user_log_in? && request.post?
       @comment.voted_by(current_user, params[:voted])
     else
       flash[:error] = "error. login needed to vote"

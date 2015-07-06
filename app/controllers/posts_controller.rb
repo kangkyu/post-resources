@@ -64,7 +64,7 @@ class PostsController < ApplicationController
   end
 
   def vote
-    if user_log_in?
+    if user_log_in? && request.post?
       @post.voted_by(current_user, params[:voted])
     else
       flash[:error] = "error. login needed to vote"
