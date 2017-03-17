@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
-ruby '2.1.10'
+ruby '2.3.1'
 
-gem 'rails', '4.1.16'
+gem 'rails', '4.2.8'
 gem 'sass-rails', '~> 5.0.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 4.1.0'
 gem 'bootstrap-sass', '~> 3.3.4'
 gem 'font-awesome-rails', '~> 4.3.0.0'
 
@@ -30,7 +30,7 @@ group :production do
   gem 'rails_12factor'
 end
 
-gem 'bcrypt', '~> 3.1.0'
+gem 'bcrypt', '~> 3.1.7'
 
 group :test do
   gem 'minitest-rails', "~> 2.0"

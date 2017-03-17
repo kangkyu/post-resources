@@ -16,6 +16,6 @@ class LoginControllerTest < ActionController::TestCase
   def test_login_destroy
     session[:user_id] = users(:one).id
     delete :destroy
-    assert_equal nil, session[:user_id]
+    assert_nil session[:user_id]
   end
 end
