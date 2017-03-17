@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
+ruby '2.1.10'
 
-gem 'rails', '4.0.13'
+gem 'rails', '4.1.16'
 gem 'sass-rails', '~> 5.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
@@ -13,7 +13,7 @@ gem 'font-awesome-rails', '~> 4.3.0.0'
 
 gem 'jquery-rails'
 gem 'turbolinks'
-gem 'jbuilder', '~> 1.2'
+gem 'jbuilder', '~> 2.0'
 
 group :doc do
   gem 'sdoc', require: false
@@ -33,7 +33,7 @@ end
 gem 'bcrypt', '~> 3.1.0'
 
 group :test do
-  gem 'minitest-rails', "~> 1.0"
+  gem 'minitest-rails', "~> 2.0"
   gem 'minitest-reporters'
   gem "minitest-rails-capybara"
 end
