@@ -22,7 +22,7 @@
 
     <h2><%= @post.title %></h2>
     <p><%= link_to @post.url, external_url(@post.url), target: "_blank" %></p>
-    <p><%= simple_format @post.description %></p>
+    <p><%= description_format @post.description %></p>
 
     <p class="text-right">
       <span class="floats">- added <%= time_ago_in_words @post.created_at %> ago,</span>

@@ -12,8 +12,7 @@ class Post < ActiveRecord::Base
   validates :url, uniqueness: true
 
   def hashtag_words
-    self.description.split
-    .select{|word| word != "#" && word.start_with?("#")}
+    self.description.scan(/#\w+/)
     .map{|word| word.gsub!(/[[:punct:]]/, '')}
   end
 
