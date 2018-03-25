@@ -26,4 +26,9 @@ PostitTemplate::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  # As of sprockets-rails version 3.1.0, used in current versions of rails,
+  # quiet_assets gem is deprecated. The asset pipeline now supports
+  # a quiet option which suppresses output of asset requests:
+  config.assets.quiet = true
 end
