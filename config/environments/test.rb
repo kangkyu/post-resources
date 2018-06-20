@@ -35,5 +35,5 @@ PostitTemplate::Application.configure do
   config.active_support.deprecation = :stderr
 
   # In Rails 5, the default value of this option will change from `:sorted` to `:random`.
-  # config.active_support.test_order = :sorted
+  config.active_support.test_order = :sorted
 end
