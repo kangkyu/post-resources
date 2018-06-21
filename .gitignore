@@ -16,7 +16,6 @@
 /tmp
 
 # Ignore
-.ruby-version
 .DS_Store
 
 course_two.md
