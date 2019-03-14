@@ -32,6 +32,8 @@ end
 gem 'bcrypt', '~> 3.1.7'
 
 group :test do
+  gem 'rails-controller-testing'
+
   gem 'minitest-rails', "~> 3.0.0"
   gem 'minitest-reporters'
   gem "minitest-rails-capybara"
