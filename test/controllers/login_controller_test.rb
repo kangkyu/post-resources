@@ -9,9 +9,7 @@ class LoginControllerTest < ActionController::TestCase
 
   def test_login_create
     user = users(:one)
-    post :create, params: {
-      login: { username: users(:one).username, password: "password" }
-    }
+    post :create, login: { username: users(:one).username, password: "password" }
     assert_equal user.id, session[:user_id]
   end
 
