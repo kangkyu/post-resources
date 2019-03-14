@@ -10,7 +10,7 @@ class PostsControllerTest < ActionController::TestCase
     end
 
     def test_get_show
-      get :show, params: { id: posts(:one) }
+      get :show, id: posts(:one)
       assert_response :success
     end
   end
@@ -27,10 +27,8 @@ class PostsControllerTest < ActionController::TestCase
       session[:user_id] = users(:one).id
 
       assert_difference 'Post.count' do
-        post :create, params: {
-          post: posts(:one).attributes
-          .merge(categories: [categories(:two), categories(:four)])
-        }
+        post :create, post: posts(:one).attributes
+         .merge(categories: [categories(:two), categories(:four)])
       end
     end
   end
@@ -41,17 +39,13 @@ class PostsControllerTest < ActionController::TestCase
       session[:user_id] = posts(:one).user.id
 
       assert_difference 'Post.count', -1 do
-        delete :destroy, params: {
-          id: posts(:one).to_param
-        }
+        delete :destroy, id: posts(:one).to_param
       end
     end
 
     def test_get_edit
       session[:user_id] = users(:one).id
-      get :edit, params: {
-        id: posts(:one)
-      }
+      get :edit, id: posts(:one)
       assert_response :success
       assert_template 'posts/edit'
     end
@@ -65,10 +59,8 @@ class PostsControllerTest < ActionController::TestCase
       new_post_category_ids = [categories(:one).id, categories(:three).id].sort
 
       assert_no_difference 'Post.count' do
-        patch :update, params: {
-          id: original_post.to_param, post: new_post_hash
-          .merge(category_ids: new_post_category_ids)
-        }
+        patch :update, id: original_post.to_param, post: new_post_hash
+           .merge(category_ids: new_post_category_ids)
       end
       assert_equal "updated title", users(:one).posts.first.title
       assert_equal new_post_category_ids, users(:one).posts.first.category_ids
@@ -92,10 +84,8 @@ class PostsControllerTest < ActionController::TestCase
       session[:user_id] = nil
 
       assert_no_difference 'Post.count' do
-        post :create, params: {
-          post: posts(:one).attributes
-          .merge(categories: [categories(:two), categories(:four)])
-        }
+        post :create, post: posts(:one).attributes
+         .merge(categories: [categories(:two), categories(:four)])
       end
     end
 
@@ -103,13 +93,13 @@ class PostsControllerTest < ActionController::TestCase
       session[:user_id] = nil
 
       assert_no_difference 'Post.count' do
-        delete :destroy, params: { id: posts(:one).id }
+        delete :destroy, id: posts(:one).id
       end
     end
 
     def test_post_edit_not_authenticated
       session[:user_id] = nil
-      get :edit, params: { id: posts(:one) }
+      get :edit, id: posts(:one)
       assert_response :redirect
       assert_redirected_to '/login'
     end
@@ -122,10 +112,8 @@ class PostsControllerTest < ActionController::TestCase
       new_post_category_ids = [categories(:one).id, categories(:three).id].sort
 
       assert_no_difference 'Post.count' do
-        patch :update, params: {
-          id: posts(:one).id, post: new_post_hash
-          .merge(category_ids: new_post_category_ids)
-        }
+        patch :update, id: posts(:one).id, post: new_post_hash
+           .merge(category_ids: new_post_category_ids)
       end
       assert_not_equal "updated title", posts(:one).title
       assert_not_equal new_post_category_ids, posts(:one).category_ids
@@ -141,13 +129,13 @@ class PostsControllerTest < ActionController::TestCase
       post_another_user_added = users(:two).posts.first
 
       assert_no_difference 'Post.count' do
-        delete :destroy, params: { id: post_another_user_added.id }
+        delete :destroy, id: post_another_user_added.id
       end
     end
 
     def test_post_edit_not_authorized
       session[:user_id] = users(:two).id
-      get :edit, params: { id: users(:one).posts.first }
+      get :edit, id: users(:one).posts.first
       assert_response :success
       assert_template 'posts/show'
     end
@@ -161,10 +149,8 @@ class PostsControllerTest < ActionController::TestCase
       new_post_category_ids = [categories(:one).id, categories(:three).id].sort
 
       assert_no_difference 'Post.count' do
-        patch :update, params: {
-          id: original_post.to_param, post: new_post_hash
-          .merge(category_ids: new_post_category_ids)
-        }
+        patch :update, id: original_post.to_param, post: new_post_hash
+           .merge(category_ids: new_post_category_ids)
       end
       assert_not_equal "updated title", users(:two).posts.first.title
       assert_not_equal new_post_category_ids, users(:two).posts.first.category_ids

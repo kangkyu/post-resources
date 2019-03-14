@@ -5,11 +5,8 @@ require File.expand_path('../config/application', __FILE__)
 
 PostitTemplate::Application.load_tasks
 
-# https://github.com/rails/rails/issues/19997#issuecomment-101460681
-namespace :test do
-  desc "Run only the tests in the `test/features` directory"
-  task :features  => "test:prepare" do
-    $LOAD_PATH << "test"
-    Rails::TestRunner.run(["test/features"])
-  end
+# https://github.com/blowmage/minitest-rails-capybara#running-tests
+Rails::TestTask.new("test:features" => "test:prepare") do |t|
+  t.pattern = "test/features/**/*_test.rb"
 end
+Rake::Task["test:run"].enhance ["test:features"]
