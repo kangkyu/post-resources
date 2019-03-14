@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 ruby '2.4.5'
 
-gem 'rails', '4.2.11'
+gem 'rails', '~> 5.0.7', '>= 5.0.7.2'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
-gem 'bootstrap-sass', '~> 3.3.7'
+gem 'bootstrap-sass', '~> 3.4.1'
 gem 'font-awesome-rails'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -32,7 +32,7 @@ end
 gem 'bcrypt', '~> 3.1.7'
 
 group :test do
-  gem 'minitest-rails', "~> 2.0"
+  gem 'minitest-rails', "~> 3.0.0"
   gem 'minitest-reporters'
   gem "minitest-rails-capybara"
 end
