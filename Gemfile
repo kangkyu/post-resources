@@ -19,6 +19,8 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'puma'
+
 group :development do
   gem 'pry'
   gem 'sqlite3', '~> 1.3.0'
