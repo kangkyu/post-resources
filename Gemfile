@@ -29,6 +29,8 @@ end
 group :production do
   gem 'pg', '< 1.0'
   gem 'rails_12factor'
+
+  gem 'scout_apm'
 end
 
 gem 'bcrypt', '~> 3.1.7'
