@@ -8,8 +8,8 @@ module ApplicationHelper
     end
   end
 
-# TODO - move it out
-  def correct_user?(user)
+  # TODO - move it out
+  def current_user?(user)
     user_log_in? && current_user == user
   end
 

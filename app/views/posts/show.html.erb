@@ -1,7 +1,7 @@
 <% provide(:post_slug, @post.to_param) %>
 
 <p class="text-right">
-  <% if @post && correct_user?(@post.user) %>
+  <% if @post && current_user?(@post.user) %>
     <%= link_to 'edit post', edit_post_path(@post), class: "btn btn-default" %>
   <% end %>
   <%= link_to 'back to all posts', posts_path, class: "btn btn-default" %>
