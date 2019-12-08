@@ -2,6 +2,14 @@ require "test_helper"
 
 class PostsControllerTest < ActionController::TestCase
 
+  def log_in(user)
+    session[:user_id] = user.id
+  end
+
+  def log_out
+    session[:user_id] = nil
+  end
+
   class NeedNotAuthenticate < PostsControllerTest
 
     def test_get_index
@@ -18,14 +26,13 @@ class PostsControllerTest < ActionController::TestCase
   class NeedAuthenticate < PostsControllerTest
 
     def test_get_new
-      session[:user_id] = users(:one).id
+      log_in users(:one)
       get :new
       assert_response :success
     end
 
     def test_post_create
-      session[:user_id] = users(:one).id
-
+      log_in users(:one)
       assert_difference 'Post.count' do
         post :create, params: {
           post: posts(:one).attributes
@@ -38,8 +45,7 @@ class PostsControllerTest < ActionController::TestCase
   class NeedAuthorize < PostsControllerTest
 
     def test_delete_destroy
-      session[:user_id] = posts(:one).user.id
-
+      log_in posts(:one).user
       assert_difference 'Post.count', -1 do
         delete :destroy, params: {
           id: posts(:one).to_param
@@ -48,7 +54,7 @@ class PostsControllerTest < ActionController::TestCase
     end
 
     def test_get_edit
-      session[:user_id] = users(:one).id
+      log_in users(:one)
       get :edit, params: {
         id: posts(:one)
       }
@@ -57,7 +63,7 @@ class PostsControllerTest < ActionController::TestCase
     end
 
     def test_patch_update
-      session[:user_id] = users(:one).id
+      log_in users(:one)
       original_post     = users(:one).posts.first
 
       new_post_hash = original_post.attributes
@@ -83,14 +89,13 @@ class PostsControllerTest < ActionController::TestCase
   class NotAuthenticated < PostsControllerTest
 
     def test_get_new_not_authenticated
-      session[:user_id] = nil
+      log_out
       get :new
       assert_response :redirect
     end
 
     def test_post_create_not_authenticated
-      session[:user_id] = nil
-
+      log_out
       assert_no_difference 'Post.count' do
         post :create, params: {
           post: posts(:one).attributes
@@ -100,23 +105,21 @@ class PostsControllerTest < ActionController::TestCase
     end
 
     def test_delete_destroy_not_authenticated
-      session[:user_id] = nil
-
+      log_out
       assert_no_difference 'Post.count' do
         delete :destroy, params: { id: posts(:one).id }
       end
     end
 
     def test_post_edit_not_authenticated
-      session[:user_id] = nil
+      log_out
       get :edit, params: { id: posts(:one) }
       assert_response :redirect
       assert_redirected_to '/login'
     end
 
     def test_patch_update_not_authenticated
-      session[:user_id] = nil
-
+      log_out
       new_post_hash = posts(:one).attributes
       new_post_hash["title"] = "updated title"
       new_post_category_ids = [categories(:one).id, categories(:three).id].sort
@@ -137,7 +140,7 @@ class PostsControllerTest < ActionController::TestCase
   class NotAuthorized < PostsControllerTest
 
     def test_delete_destroy_not_authorized
-      session[:user_id] = users(:one).id
+      log_in users(:one)
       post_another_user_added = users(:two).posts.first
 
       assert_no_difference 'Post.count' do
@@ -146,15 +149,15 @@ class PostsControllerTest < ActionController::TestCase
     end
 
     def test_post_edit_not_authorized
-      session[:user_id] = users(:two).id
+      log_in users(:two)
       get :edit, params: { id: users(:one).posts.first }
       assert_response :success
       assert_template 'posts/show'
     end
 
     def test_patch_update_not_authorized
-      session[:user_id] = users(:one).id
-      original_post     = users(:two).posts.first
+      log_in users(:one)
+      original_post = users(:two).posts.first
 
       new_post_hash = original_post.attributes
       new_post_hash["title"] = "updated title"
