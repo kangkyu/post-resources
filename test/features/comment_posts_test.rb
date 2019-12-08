@@ -4,7 +4,7 @@ class CommentPostsTest < Capybara::Rails::TestCase
   # include ActionController::TemplateAssertions
 
   def setup
-    test_log_in
+    log_in
   end
 
   def test_add_comments_form_on_posts_show_page
@@ -25,11 +25,13 @@ class CommentPostsTest < Capybara::Rails::TestCase
   end
 
   def test_log_in
+    assert_text "user logged in"
+  end
+
+  def log_in
     visit login_path
     fill_in "Username", with: users(:one).username
     fill_in "Password", with: 'password'
     click_button "Login"
-
-    assert_text "user logged in"
   end
 end

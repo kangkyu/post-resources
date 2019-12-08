@@ -8,11 +8,11 @@ require "minitest/rails"
 require "minitest/rails/capybara"
 
 # Uncomment for awesome colorful output
-# require "minitest/pride"
+require "minitest/pride"
 
-require "minitest/reporters"
+# require "minitest/reporters"
 # Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true)]
-Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
+# Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
