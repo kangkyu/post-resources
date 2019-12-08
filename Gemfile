@@ -40,6 +40,6 @@ group :test do
 
   gem 'minitest', '5.10.3'
   gem 'minitest-rails', "~> 3.0.0"
-  gem 'minitest-reporters'
+  # gem 'minitest-reporters'
   gem "minitest-rails-capybara"
 end
