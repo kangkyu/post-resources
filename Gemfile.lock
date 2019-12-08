@@ -203,7 +203,7 @@ DEPENDENCIES
   minitest (= 5.10.3)
   minitest-rails (~> 3.0.0)
   minitest-rails-capybara
-  pg (< 1.0)
+  pg (>= 0.18, < 2.0)
   pry
   puma (~> 3.12.0)
   rails (>= 5.1.0, < 5.2)
