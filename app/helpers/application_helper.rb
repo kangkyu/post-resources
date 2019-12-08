@@ -34,7 +34,7 @@ module ApplicationHelper
   end
 
   def arrow_helper(name_of_icon, vote_of_icon, votable, color_condition)
-
+    vote_post_css = vote_of_icon ? 'vote-up-post' : 'vote-down-post'
     if color_condition
       link_to fa_icon(name_of_icon, style: "color: OrangeRed;"),
         {
@@ -43,7 +43,7 @@ module ApplicationHelper
           id: votable,
           action: 'vote'
         },
-        method: 'post'
+        method: 'post', class: vote_post_css
     else
       link_to fa_icon(name_of_icon, style: "color: gray;"),
         {
@@ -52,7 +52,7 @@ module ApplicationHelper
           id: votable,
           action: 'vote'
         },
-        method: 'post'
+        method: 'post', class: vote_post_css
     end
   end
 end
