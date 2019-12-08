@@ -7,14 +7,14 @@ class CommentPostsTest < Capybara::Rails::TestCase
     test_log_in
   end
 
-  test "add comments form on posts show page" do
+  def test_add_comments_form_on_posts_show_page
     post = posts(:one)
     visit post_path(post)
 
     assert_button 'Add Comment'
   end
 
-  test "submit creating a comment" do
+  def test_submit_creating_a_comment
     post = posts(:one)
     visit post_path(post)
 
@@ -24,7 +24,7 @@ class CommentPostsTest < Capybara::Rails::TestCase
     assert_content page, "this is a test comment."
   end
 
-  test "log in" do
+  def test_log_in
     visit login_path
     fill_in "Username", with: users(:one).username
     fill_in "Password", with: 'password'

@@ -1,14 +1,15 @@
 require "test_helper"
 
 class LoginUserTest < Capybara::Rails::TestCase
-  test "before login" do
+
+  def test_before_login
     visit root_path
 
     assert_link "register"
     assert_link "login"
   end
 
-  test "after login" do
+  def test_after_logout
     test_log_in
     visit root_path
 
@@ -16,14 +17,14 @@ class LoginUserTest < Capybara::Rails::TestCase
     assert_link "logout"
   end
 
-  test "log out" do
+  def test_log_out
     test_log_in
     click_link "logout"
 
     assert_text "user logged out"
   end
 
-  test "log in" do
+  def test_log_in
     visit login_path
     fill_in "Username", with: users(:one).username
     fill_in "Password", with: 'password'
