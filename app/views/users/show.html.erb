@@ -1,7 +1,7 @@
 <%= render 'shared/title', title: @user.username %>
 
 <p class="text-right">
-  <% if correct_user?(@user) %>
+  <% if current_user?(@user) %>
     <%= link_to 'edit user', edit_user_path(@user), class: "btn btn-default" %>
   <% end %>
   <%= link_to 'back to all posts', posts_path, class: "btn btn-default" %>
