@@ -106,7 +106,7 @@ GEM
       minitest-metadata (~> 0.6)
       minitest-rails (~> 3.0)
     nio4r (2.5.2)
-    nokogiri (1.10.7)
+    nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
     parser (2.6.5.0)
       ast (~> 2.4.0)
