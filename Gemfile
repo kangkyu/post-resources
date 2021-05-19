@@ -20,7 +20,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-gem 'puma', '~> 3.12.6'
+gem 'puma', '~> 4.3.8'
 
 group :development do
   gem 'pry'
