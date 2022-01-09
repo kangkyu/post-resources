@@ -2,7 +2,7 @@ class Post < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :posts_categories, dependent: :destroy
   has_many :categories, through: :posts_categories
-  belongs_to :user
+  belongs_to :user, optional: true
 
   validates :title, presence: true
 

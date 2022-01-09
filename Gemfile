@@ -21,8 +21,10 @@ group :doc do
 end
 
 gem 'puma', '~> 3.12.6'
+gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development do
+  gem 'listen'
   gem 'pry'
   gem 'sqlite3', '~> 1.3.0'
 end
