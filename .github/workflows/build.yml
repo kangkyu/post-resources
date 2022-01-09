@@ -1,0 +1,22 @@
+name: Rails
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Ruby and install gems
+      uses: ruby/setup-ruby@v1 # see https://github.com/ruby/setup-ruby#versioning
+      with:
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+
+    - name: Run tests
+      run: bundle exec rails test
