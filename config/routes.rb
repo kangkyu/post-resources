@@ -1,4 +1,4 @@
-PostitTemplate::Application.routes.draw do
+Rails.application.routes.draw do
   root to: 'posts#index'
 
   post 'categories' => 'categories#create'
