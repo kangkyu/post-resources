@@ -2,11 +2,11 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "3.26.0"
+      version = "3.75.2"
     }
     random = {
       source  = "hashicorp/random"
-      version = "3.0.1"
+      version = "3.3.2"
     }
   }
   required_version = "~> 1.0"
@@ -31,11 +31,12 @@ resource "aws_instance" "web" {
   ami                    = "ami-03d5c68bab01f3496"
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.web-sg.id]
+  key_name = "abcd_key_name"
 
   user_data = <<-EOF
 #!/bin/bash
 bundle exec puma -t 5:5 -p 3000 -e $RACK_ENV
-              EOF
+  EOF
 }
 
 resource "aws_security_group" "web-sg" {
