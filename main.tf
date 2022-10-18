@@ -2,22 +2,25 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "3.75.2"
+      version = "4.19.0"
     }
-    random = {
-      source  = "hashicorp/random"
-      version = "3.3.2"
-    }
+    # random = {
+    #   source  = "hashicorp/random"
+    #   version = "3.3.2"
+    # }
   }
   required_version = "~> 1.0"
 
-  backend "remote" {
-    organization = "lining-link"
+  # backend "remote" {
+  #   organization = "lining-link"
 
-    workspaces {
-      name = "post-resources"
-    }
-  }
+  #   workspaces {
+  #     name = "post-resources"
+  #   }
+  # }
+  # backend "local" {
+  #   path = 
+  # }
 }
 
 
@@ -25,30 +28,30 @@ provider "aws" {
   region = "us-west-2"
 }
 
-resource "random_pet" "sg" {}
+# resource "random_pet" "sg" {}
 
 resource "aws_instance" "web" {
-  ami                    = "ami-03d5c68bab01f3496"
+  ami                    = "ami-0785cb598535683bc"
   instance_type          = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.web-sg.id]
-  key_name = "abcd_key_name"
+#   vpc_security_group_ids = [aws_security_group.web-sg.id]
+#   key_name               = "another_key_pair"
 
-  user_data = <<-EOF
-#!/bin/bash
-bundle exec puma -t 5:5 -p 3000 -e $RACK_ENV
-  EOF
+#   user_data = <<-EOF
+# #!/bin/bash
+# bundle exec puma -t 5:5 -p 3000 -e $RACK_ENV
+#   EOF
 }
 
-resource "aws_security_group" "web-sg" {
-  name = "${random_pet.sg.id}-sg"
-  ingress {
-    from_port   = 8080
-    to_port     = 8080
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
+# resource "aws_security_group" "web-sg" {
+#   name = "${random_pet.sg.id}-sg"
+#   ingress {
+#     from_port   = 8080
+#     to_port     = 8080
+#     protocol    = "tcp"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
+# }
 
-output "web-address" {
-  value = "${aws_instance.web.public_dns}:8080"
-}
+# output "web-address" {
+#   value = "${aws_instance.web.public_dns}:8080"
+# }
