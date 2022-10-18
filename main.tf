@@ -40,6 +40,9 @@ resource "aws_instance" "web" {
 # #!/bin/bash
 # bundle exec puma -t 5:5 -p 3000 -e $RACK_ENV
 #   EOF
+  tags = {
+    Name = "post-resources-web"
+  }
 }
 
 # resource "aws_security_group" "web-sg" {

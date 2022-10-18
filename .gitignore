@@ -42,3 +42,5 @@ course_two.md
 week_four.md
 
 .terraform
+*.tfstate
+*.tfstate.backup
