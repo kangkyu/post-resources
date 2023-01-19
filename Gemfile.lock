@@ -78,7 +78,7 @@ GEM
     ffi (1.15.5)
     font-awesome-rails (4.7.0.5)
       railties (>= 3.2, < 6.1)
-    globalid (1.0.0)
+    globalid (1.0.1)
       activesupport (>= 5.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
