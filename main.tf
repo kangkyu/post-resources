@@ -150,7 +150,8 @@ resource "random_password" "password" {
 
 resource "aws_db_instance" "mydb" {
   allocated_storage       = 20 # gigabytes
-  backup_retention_period = 7  # in days
+  apply_immediately       = true
+  backup_retention_period = 0  # in days
   db_subnet_group_name    = aws_db_subnet_group.default.name
   engine                  = "postgres"
   engine_version          = "14.3"
@@ -162,6 +163,7 @@ resource "aws_db_instance" "mydb" {
   password                = random_password.password.result
   port                    = 5432
   publicly_accessible     = false
+  skip_final_snapshot     = true
   storage_encrypted       = true # you should always do this
   storage_type            = "gp2"
   username                = "mydb"
