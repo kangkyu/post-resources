@@ -42,7 +42,7 @@ resource "aws_security_group" "mysg" {
 
   description = "RDS postgres servers (terraform-managed)"
   vpc_id      = aws_vpc.rds.id
-  depends_on  = [
+  depends_on = [
     aws_vpc.rds
   ]
 
@@ -72,49 +72,49 @@ resource "aws_internet_gateway" "igw" {
 }
 
 resource "aws_subnet" "rds_a" {
-  vpc_id            = aws_vpc.rds.id
-  cidr_block        = "10.0.1.0/24"
-  availability_zone = "us-west-2a"
+  vpc_id                  = aws_vpc.rds.id
+  cidr_block              = "10.0.1.0/24"
+  availability_zone       = "us-west-2a"
   map_public_ip_on_launch = true
 }
 
 resource "aws_subnet" "rds_b" {
-  vpc_id            = aws_vpc.rds.id
-  cidr_block        = "10.0.2.0/24"
-  availability_zone = "us-west-2b"
+  vpc_id                  = aws_vpc.rds.id
+  cidr_block              = "10.0.2.0/24"
+  availability_zone       = "us-west-2b"
   map_public_ip_on_launch = true
 }
 
 resource "aws_subnet" "rds_c" {
-  vpc_id            = aws_vpc.rds.id
-  cidr_block        = "10.0.3.0/24"
-  availability_zone = "us-west-2c"
+  vpc_id                  = aws_vpc.rds.id
+  cidr_block              = "10.0.3.0/24"
+  availability_zone       = "us-west-2c"
   map_public_ip_on_launch = true
 }
 
 resource "aws_subnet" "rds_a_private" {
-  vpc_id            = aws_vpc.rds.id
-  cidr_block        = "10.0.4.0/24"
-  availability_zone = "us-west-2a"
+  vpc_id                  = aws_vpc.rds.id
+  cidr_block              = "10.0.4.0/24"
+  availability_zone       = "us-west-2a"
   map_public_ip_on_launch = false
 }
 
 resource "aws_subnet" "rds_b_private" {
-  vpc_id            = aws_vpc.rds.id
-  cidr_block        = "10.0.5.0/24"
-  availability_zone = "us-west-2b"
+  vpc_id                  = aws_vpc.rds.id
+  cidr_block              = "10.0.5.0/24"
+  availability_zone       = "us-west-2b"
   map_public_ip_on_launch = false
 }
 
 resource "aws_subnet" "rds_c_private" {
-  vpc_id            = aws_vpc.rds.id
-  cidr_block        = "10.0.6.0/24"
-  availability_zone = "us-west-2c"
+  vpc_id                  = aws_vpc.rds.id
+  cidr_block              = "10.0.6.0/24"
+  availability_zone       = "us-west-2c"
   map_public_ip_on_launch = false
 }
 
 resource "aws_db_subnet_group" "default" {
-  name       = "main"
+  name = "main"
   subnet_ids = [
     aws_subnet.rds_a.id,
     aws_subnet.rds_b.id,
@@ -151,7 +151,7 @@ resource "random_password" "password" {
 resource "aws_db_instance" "mydb" {
   allocated_storage       = 20 # gigabytes
   apply_immediately       = true
-  backup_retention_period = 0  # in days
+  backup_retention_period = 0 # in days
   db_subnet_group_name    = aws_db_subnet_group.default.name
   engine                  = "postgres"
   engine_version          = "14.3"
