@@ -233,3 +233,43 @@ resource "aws_db_instance" "mydb" {
   username                = "mydb"
   vpc_security_group_ids  = [aws_security_group.mydbsg.id]
 }
+
+data "aws_ami" "ubuntu" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  owners = ["099720109477"] # Canonical
+}
+
+resource "aws_instance" "myweb" {
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = "t3.micro"
+
+  tags = {
+    Name = "myweb"
+  }
+}
+
+resource "aws_eip" "myweb_eip" {
+  instance = aws_instance.myweb.id
+  vpc      = true
+
+  tags = {
+    Name = "myweb_eip"
+  }
+}
+
+output "web_public_dns" {
+  value = aws_eip.myweb_eip.public_dns
+
+  depends_on = [aws_eip.myweb_eip]
+}
