@@ -1,6 +1,6 @@
 require "test_helper"
 
-class LoginUserTest < Capybara::Rails::TestCase
+class LoginUserTest < ActionDispatch::IntegrationTest
 
   def test_before_login
     visit root_path

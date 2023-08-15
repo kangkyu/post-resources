@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class EditPostsTest < Capybara::Rails::TestCase
+class EditPostsTest < ActionDispatch::IntegrationTest
 
   def test_edit_post_button_same_user_show_page
     log_in

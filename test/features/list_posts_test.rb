@@ -1,6 +1,6 @@
 require "test_helper"
 
-class ListPostsTest < Capybara::Rails::TestCase
+class ListPostsTest < ActionDispatch::IntegrationTest
 
   def test_view_posts_index
     visit root_path
