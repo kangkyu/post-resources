@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.7.7'
 
-gem 'rails', '~> 5.2.0'
+gem 'rails', '~> 5.2.8.1'
 gem 'sassc', '~> 2.3.0'
 gem 'sassc-rails', '~> 2.1.0'
 gem 'uglifier', '>= 1.3.0'
