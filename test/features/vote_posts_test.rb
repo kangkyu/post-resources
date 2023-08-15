@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class VotePostsTest < Capybara::Rails::TestCase
+class VotePostsTest < ActionDispatch::IntegrationTest
 
   def setup
     log_in

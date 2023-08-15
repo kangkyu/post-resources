@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
-ruby '2.7.7'
+ruby '3.1.4'
 
-gem 'rails', '~> 5.2.0'
+gem 'rails', '~> 7.0.0'
 gem 'sassc', '~> 2.3.0'
 gem 'sassc-rails', '~> 2.1.0'
 gem 'uglifier', '>= 1.3.0'
@@ -27,7 +27,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development do
   gem 'listen'
   gem 'pry'
-  gem 'sqlite3', '~> 1.3.0'
+  gem 'sqlite3', '~> 1.6.0'
 end
 
 group :production do
@@ -42,8 +42,7 @@ gem 'bcrypt', '~> 3.1.7'
 group :test do
   gem 'rails-controller-testing'
 
-  gem 'minitest', '5.10.3'
-  gem 'minitest-rails', "~> 3.0.0"
-  # gem 'minitest-reporters'
-  gem "minitest-rails-capybara"
+  gem 'minitest', '5.19.0'
+  gem 'minitest-rails', '~> 7.0.0'
+  gem 'capybara', '3.39.2'
 end

@@ -1,6 +1,6 @@
 require "test_helper"
 
-class CommentPostsTest < Capybara::Rails::TestCase
+class CommentPostsTest < ActionDispatch::IntegrationTest
   # include ActionController::TemplateAssertions
 
   def setup
