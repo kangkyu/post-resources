@@ -21,7 +21,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-gem 'puma', '~> 4.3.12'
+gem 'puma', '~> 5.6.7'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development do
